@@ -1,0 +1,140 @@
+@import url(https://fonts.googleapis.com/css?family=Lato);
+@import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css);
+
+body{
+    font-family: 'Roboto', sans-serif;
+    background-color: rgba(238, 238, 238, 0.363);
+}
+
+header{
+    background-image: url(../images/Path\ 3.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 600.81px;
+    width: 100%;
+}
+
+.myNavbar{
+    padding-top: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    font-size: 1rem;
+}
+
+
+
+.head2{
+    display: flex;
+    align-items: center;
+}
+
+/* nav a tag */
+.n-item{
+    margin-left: 1.5rem;
+}
+
+.n-item a{
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+}
+
+/* nav btn */
+.btn1{
+    box-shadow:inset 0px 1px 0px 0px #e89325;
+	background-color: #fa8e36;
+	border-radius:.3rem;
+	border:1px solid #e97414;
+	cursor:pointer;
+	color:#ffffff;
+	padding:.6rem 1rem;
+	text-decoration:none;
+    text-shadow:0px 1px 0px #855d29;
+}
+
+.btn1:hover{
+    background-color: #e6702d;
+    transition: .5s;
+}
+
+
+/* main */
+main{
+    background-color: #ffffff;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.109), 0 6px 6px rgba(0,0,0,0.23);
+    margin-bottom: 10rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 4rem;
+}
+
+table{
+    margin-bottom: 20px;
+    font-size: .9rem;
+    color: rgb(77, 77, 77);
+}
+
+.form-body{
+    padding-left: 4rem;
+}
+
+.travel-image{
+    padding-right: 4rem;
+}
+
+
+/* submit */
+.publish{
+    background-color: #6159E6;
+    color: white;
+    border: 1px rgb(90, 83, 218);
+    padding: 8px 35px;
+    font-size: 1rem;
+    border-radius:.3rem;
+}
+
+.publish:hover{
+    background-color: rgb(60, 52, 209);
+    transition: .5s;
+}
+/* footer */
+.contact{
+    background-image: url(../images/Mask\ Group\ 2.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 280px;
+    width: 100%;
+
+}
+
+.footer-info{
+     display: flex;
+    align-items: center;
+    justify-content: start;
+}
+
+.information{
+    width: 50%;
+    margin-top: 5.5rem;
+    margin-left: 8rem;
+}
+
+.footer-logo{
+    margin-top: 3rem;
+}
+
+
+
+
+/* icon */
+i{
+    color: white;
+    height: 4rem;
+    width: auto;
+    margin-right: 10px;
+    
+}
+
+.information h4, p{
+    color: white;
+}
