@@ -29,30 +29,120 @@
   <!-- php strt  -->
   <?php
 
-  $servername = "localhost";
-  $username = "root";
-  $password = "";
-  $dbname = 'hotel';
-
-  // Create connection
-  $conn = mysqli_connect($servername, $username, $password, $dbname);
-
-  // Check connection
-  if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
-  }
-
-  // db
-
   // define variables and initialize with empty values
-  $hnameErr = "";
-  $hname = "";
 
-  if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if (empty($_POST["name"])) {
-      $hnameErr = "Name is required";
+  if (isset($_POST['submit'])) {
+
+    // viwer email
+    if ($_POST['vemail'] == "") {
+      $error_msg['vemail'] = "Viwer Email is required";
     } else {
-      $hname = test_input($_POST["name"]);
+      $vemail = test_input($_POST['vemail']);
+      // check if e-mail address is well-formed
+      if (!filter_var($vemail, FILTER_VALIDATE_EMAIL)) {
+        $error_msg['vemail'] = "Invalid email format";
+      }
+    }
+
+    // hotel email
+    if ($_POST['hemail'] == "") {
+      $error_msg['hemail'] = "Hotel Email is required";
+    } else {
+      $hemail = test_input($_POST['hemail']);
+      // check if e-mail address is well-formed
+      if (!filter_var($hemail, FILTER_VALIDATE_EMAIL)) {
+        $error_msg['hemail'] = "Invalid email format";
+      }
+    }
+
+    // header
+    if ($_POST['hheader'] == "") {
+      $error_msg['hheader'] = "Name is required";
+    } else {
+      $hheader = test_input($_POST['hheader']);
+      // check if e-mail address is well-formed
+      if (!preg_match("/^[a-zA-Z ]*$/", $hheader)) {
+        $error_msg['hname'] = "Invalid header name format";
+      }
+    }
+
+    // adress
+    if ($_POST['adress'] == "") {
+      $error_msg['adress'] = "Adress is required";
+    }
+
+    // room1
+    if ($_POST['room1'] == "") {
+      $error_msg['room1'] = "Room price is required";
+    } else {
+      $hheader = test_input($_POST['room1']);
+      // check if e-mail address is well-formed
+      if ((strlen($_POST['room1'])) > 3) {
+        $error_msg['room1'] = "maximum 3 digitt";
+      }
+    }
+
+    // room2
+    if ($_POST['room2'] == "") {
+      $error_msg['room2'] = "Room price is required";
+    } else {
+      $hheader = test_input($_POST['room2']);
+      // check if e-mail address is well-formed
+      if ((strlen($_POST['room2'])) > 3) {
+        $error_msg['room2'] = "maximum 3 digitt";
+      }
+    }
+
+    // room3
+    if ($_POST['room3'] == "") {
+      $error_msg['room3'] = "Room price is required";
+    } else {
+      $hheader = test_input($_POST['room3']);
+      // check if e-mail address is well-formed
+      if ((strlen($_POST['room3'])) > 3) {
+        $error_msg['room3'] = "maximum 3 digitt";
+      }
+    }
+
+    // description
+    if ($_POST['description'] == "") {
+      $error_msg['description'] = "description is required";
+    }
+
+    //img1
+    if (empty($_FILES['img1']['name'])) {
+      $error_msg['img1'] = "image is required";
+    } else {
+      $img1 = $_FILES['img1']['name'];
+      $allowed =  array('jpeg', 'jpg', "png", "gif", "bmp", "JPEG", "JPG", "PNG", "GIF", "BMP");
+      $ext = pathinfo($img1, PATHINFO_EXTENSION);
+      if (!in_array($ext, $allowed)) {
+        $error_msg['img1'] = "image is not valid";
+      }
+    }
+
+    //img2
+    if (empty($_FILES['img2']['name'])) {
+      $error_msg['img2'] = "image is required";
+    } else {
+      $img2 = $_FILES['img2']['name'];
+      $allowed =  array('jpeg', 'jpg', "png", "gif", "bmp", "JPEG", "JPG", "PNG", "GIF", "BMP");
+      $ext = pathinfo($img2, PATHINFO_EXTENSION);
+      if (!in_array($ext, $allowed)) {
+        $error_msg['img2'] = "image is not valid";
+      }
+    }
+
+    //img3
+    if (empty($_FILES['img3']['name'])) {
+      $error_msg['img3'] = "image is required";
+    } else {
+      $img3 = $_FILES['img3']['name'];
+      $allowed =  array('jpeg', 'jpg', "png", "gif", "bmp", "JPEG", "JPG", "PNG", "GIF", "BMP");
+      $ext = pathinfo($img3, PATHINFO_EXTENSION);
+      if (!in_array($ext, $allowed)) {
+        $error_msg['img3'] = "image is not valid";
+      }
     }
   }
 
@@ -64,7 +154,6 @@
     return $data;
   }
 
-  mysqli_close($conn);
   ?>
   <!-- php end -->
 
@@ -97,25 +186,30 @@
 
   <!-- main -->
   <main class="container">
-
-    <?php
-
-
-    ?>
-
     <div class="form-body">
       <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" enctype="multipart/form-data">
 
         <table class="tab1">
           <tr>
             <th>
-              <label for="hname">Hotel Name:</label><br>
-              <input type="text" id="hname" name="hname" style="width: 250px; margin-right: 10px"><br>
-              <span class="error"> <?php echo $hnameErr; ?></span>
+              <label for="vemail">Viwer Email:</label><br>
+              <input type="email" id="vemail" name="vemail" style="width: 250px; margin-right: 10px">
             </th>
             <th>
               <label for="hemail">Hotel Email:</label><br>
               <input type="email" id="hemail" name="hemail" style="width: 250px;">
+            </th>
+          </tr>
+          <tr>
+            <th style="color: red">
+              <?php if (isset($error_msg['vemail'])) {
+                echo $error_msg['vemail'];
+              }  ?>
+            </th>
+            <th style="color: red">
+              <?php if (isset($error_msg['hemail'])) {
+                echo $error_msg['hemail'];
+              }  ?>
             </th>
           </tr>
         </table>
@@ -127,6 +221,13 @@
               <input type="text" id="hheader" name="hheader" style="width:510px">
             </th>
           </tr>
+          <tr>
+            <th style="color: red">
+              <?php if (isset($error_msg['hheader'])) {
+                echo $error_msg['hheader'];
+              }  ?>
+            </th>
+          </tr>
         </table>
 
         <table class="tab3">
@@ -134,6 +235,13 @@
             <th>
               <label for="adress">Adreess:</label><br>
               <input type="text" id="adress" name="adress" style="width: 510px">
+            </th>
+          </tr>
+          <tr>
+            <th style="color: red">
+              <?php if (isset($error_msg['adress'])) {
+                echo $error_msg['adress'];
+              }  ?>
             </th>
           </tr>
         </table>
@@ -153,13 +261,37 @@
               <input type="number" id="room3" name="room3" style="width: 166.67px;">
             </th>
           </tr>
+          <tr>
+            <th style="color: red">
+              <?php if (isset($error_msg['room1'])) {
+                echo $error_msg['room1'];
+              }  ?>
+            </th>
+            <th style="color: red">
+              <?php if (isset($error_msg['room2'])) {
+                echo $error_msg['room2'];
+              }  ?>
+            </th>
+            <th style="color: red">
+              <?php if (isset($error_msg['room3'])) {
+                echo $error_msg['room3'];
+              }  ?>
+            </th>
+          </tr>
         </table>
 
         <table class="tab6">
           <tr>
             <th>
-              <label for="adress">Hotel Description:</label><br>
+              <label for="description">Hotel Description:</label><br>
               <textarea name="description" rows="5" cols="50" style="width: 510px"></textarea>
+            </th>
+          </tr>
+          <tr>
+            <th style="color: red">
+              <?php if (isset($error_msg['description'])) {
+                echo $error_msg['description'];
+              }  ?>
             </th>
           </tr>
         </table>
@@ -178,13 +310,30 @@
               <input type="file" id="img2" name="img2" style="width: 166.67px; margin-right:5px;">
             </th>
             <th>
-              <input type="file" id="img2" name="img2" style="width: 166.67px;">
+              <input type="file" id="img3" name="img3" style="width: 166.67px;">
+            </th>
+          </tr>
+          <tr>
+            <th style="color: red">
+              <?php if (isset($error_msg['img1'])) {
+                echo $error_msg['img1'];
+              }  ?>
+            </th>
+            <th style="color: red">
+              <?php if (isset($error_msg['img2'])) {
+                echo $error_msg['img2'];
+              }  ?>
+            </th>
+            <th style="color: red">
+              <?php if (isset($error_msg['img3'])) {
+                echo $error_msg['img3'];
+              }  ?>
             </th>
           </tr>
         </table>
         <table>
           <tr>
-            <th><input type="submit" value="Publish" class="publish"></th>
+            <th><input type="submit" value="Publish" class="publish" name="submit"></th>
           </tr>
         </table>
 
@@ -229,6 +378,15 @@
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  </body>
+
+  <!-- massage check -->
+  <?php
+  if (isset($error_msg) == true) {
+    die();
+  } else {
+    include 'ownerdb.php';
+  }
+  ?>
+</body>
 
 </html>
