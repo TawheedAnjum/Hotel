@@ -59,20 +59,22 @@ body{
     width: 370px;
     min-height: 200px;
     position: absolute;
-    top: 10rem;
+    top: 7rem;
     right: 12rem;
     border-radius:8px;
 }
 
 input{
     width: 300px;
-    margin-bottom: 1rem;
     padding: .8rem 1rem;
     background-color: #F2F2F2;
     border: none;
     border-radius: 5px;
 }
 
+.tab{
+    margin-bottom: .8rem;
+}
 /* register btn */
 
 .register{
@@ -102,7 +104,6 @@ span{
 /* dropdown */
 .category {
     margin-left: .4rem;
-    margin-bottom: 1rem;
     padding: .3rem .2rem;
     background-color: #F2F2F2;
     border: none;
