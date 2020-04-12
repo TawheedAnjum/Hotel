@@ -1,116 +1,63 @@
-<?php
+<!doctype html>
+<html lang="en">
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = 'hotel';
+<head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-// Create connection
-$conn = mysqli_connect($servername, $username, $password, $dbname);
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
 
-// Check connection
-if (!$conn) {
-  die("Connection failed: " . mysqli_connect_error());
-}
+<body>
 
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  if (isset($_POST['hname']) && isset($_POST['hemail'])) {
-    $hname = $_POST['hname'];
-    $hemail = $_POST['hemail'];
-  }
+    <?php
 
 
+        session_start();
+        echo $_SESSION['vemail'];
+    // if (!isset($_COOKIE['hotel'])) {
 
-  $sql = "INSERT INTO test (hname, hemail ) VALUES(?,?)";
-  $stmtinsert = $conn->prepare($sql);
-  $stmtinsert->bind_param("ss", $hname, $hemail);
-  $result = $stmtinsert->execute();
-  if ($result) {
-    echo 'Successfully registered.';
-  } else {
-    echo "There were erros while registering. Please <a href='register.php'>Retry</a>";
-  }
-}
+        // $servername = "localhost";
+        // $username = "root";
+        // $password = "";
+        // $dbname = 'hotel';
 
-mysqli_close($conn);
-?>
+        // // Create connection
+        // $conn = mysqli_connect($servername, $username, $password, $dbname);
 
-
-<?php
-
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = 'hotel';
-
-// Create connection
-$conn = mysqli_connect($servername, $username, $password, $dbname);
-
-// Check connection
-if (!$conn) {
-  die("Connection failed: " . mysqli_connect_error());
-}
-
-// sql
-if(isset($_POST['submit']))
-{
-  $hname=$_POST['hname'];
-  $hemail=$_POST['hemail'];
-  $img1=addslashes(file_get_contents($_FILES['img1']['temp_name']));
-
-  $query="INSERT INTO test values ('$hname', '$hemail', '$img1')";
-  if(mysqli_query($conn, $query))
-  {
-     echo "done";
-  }
-
-}
-
-mysqli_close($conn);
-
-?>
+        // //Check connection
+        // if (!$conn) {
+        //     die("Connection failed: " . mysqli_connect_error());
+        // }
 
 
-<?php
-  // Create database connection
-  $db = mysqli_connect("localhost", "root", "", "hotel");
+        // $sql = "SELECT * FROM hprofile";
+        // $result = mysqli_query($conn, $sql);
+        // while ($row3 = mysqli_fetch_array($result)) {
+        //     echo $row3['hheader'];
+        //     echo "<img src='db_image/" . $row3['img1'] . "' height='200px' weight='auto' >";
+        // }
 
-  // If upload button is clicked ...
-  if (isset($_POST['submit'])) {
-  	// Get image name
-  	$img1 = $_FILES['img1']['name'];
-  	// Get text
-    $hname = mysqli_real_escape_string($db, $_POST['hname']);
-    $hemail = mysqli_real_escape_string($db, $_POST['hemail']);
+        echo "ok";
 
-  	// image file directory
-  	$target = "images/".basename($img1);
-
-  	$sql = "INSERT INTO test (hname, hemail, img1) VALUES ('$hname', '$hemail' '$img1')";
-  	// execute query
-  	mysqli_query($db, $sql);
-
-  	if (move_uploaded_file($_FILES['img1']['tmp_name'], $target)) {
-  		echo"Image uploaded successfully";
-  	}else{
-  		echo "Failed to upload image";
-  	}
-  }
-  $result = mysqli_query($db, "SELECT * FROM test");
-?>
+        //  mysqli_close($conn);
+        session_destroy();
+    // }
+    ?>
 
 
 
-//img1
-    if ($_POST["img1"]== "") {
-      $error_msg['img1'] = "img is required";
-    } else {
-      $img1 = test_input($_POST["img1"]);
-      $allowed =  array('jpeg','jpg', "png", "gif", "bmp", "JPEG","JPG", "PNG", "GIF", "BMP");
-      $ext = pathinfo($img1, PATHINFO_EXTENSION);
 
-      if(!in_array($ext,$allowed) ) {
-        $error_msg['img1'] = "img is not valid";
-      }
-    }
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+
+</html>

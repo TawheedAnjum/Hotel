@@ -2,7 +2,7 @@
 
 $servername = 'localhost';
 $username = 'root';
-$password = ''; 
+$password = '';
 $dbname = 'hotel';
 
 // Create connection
@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $password = $_POST['password'];
         $category = $_POST['category'];
     }
-    
+
     $sql = "SELECT * FROM user WHERE email='$email' AND password='$password'  AND category='$category'";
 
     //echo $sql;
@@ -28,17 +28,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($count == 1) {
         session_start();
-        $_SESSION["logemail"]=$email;
+        $_SESSION["logemail"] = $email;
 
-        if ( $category=='viwer') {
-            header('Location: '.'viwer.php');
-        }
-        elseif($category=='admin'){
-            header('Location: '.'admin.php');
-        }
+        if ($category == 'viwer') {
+            header('Location: ' . 'viwer.php');
+        } elseif ($category == 'hotel_owner') {
+            $sql2 = "SELECT * FROM hprofile";
+            $result2 = $conn->query($sql2);
+
+            while ($row2 = mysqli_fetch_array($result2)) {
+                $vemail = $row2['vemail'];
+                session_start();
+                $_SESSION['vemail'] = $vemail;
+
+                if ($row2['vemail'] == $email) {
+                    header('Location: ' . 'profile.php');
+                } else {
+                    header('Location: ' . 'owner.php');
+                }
+            }
             
-        else{
-            header('Location: '.'owner.php');
+        } else {
+            header('Location: ' . 'admin.php');
         }
     } else {
         echo "Login failed. Please <a href='loginw.php'>Retry</a>";
@@ -48,4 +59,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     echo 'Error';
 }
 $conn->close();
-?>

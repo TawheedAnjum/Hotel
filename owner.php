@@ -1,3 +1,139 @@
+<?php
+
+session_start();
+
+// define variables and initialize with empty values
+
+if (isset($_POST['submit'])) {
+
+  // viwer email
+  if ($_POST['vemail'] == "") {
+    $error_msg['vemail'] = "Viwer Email is required";
+  } else {
+    $vemail = test_input($_POST['vemail']);
+    // check if e-mail address is well-formed
+    if (!filter_var($vemail, FILTER_VALIDATE_EMAIL)) {
+      $error_msg['vemail'] = "Invalid email format";
+    }
+  }
+
+  // hotel email
+  if ($_POST['hemail'] == "") {
+    $error_msg['hemail'] = "Hotel Email is required";
+  } else {
+    $hemail = test_input($_POST['hemail']);
+    // check if e-mail address is well-formed
+    if (!filter_var($hemail, FILTER_VALIDATE_EMAIL)) {
+      $error_msg['hemail'] = "Invalid email format";
+    }
+  }
+
+  // header
+  if ($_POST['hheader'] == "") {
+    $error_msg['hheader'] = "Name is required";
+  } else {
+    $hheader = test_input($_POST['hheader']);
+    // check if e-mail address is well-formed
+    if (!preg_match("/^[a-zA-Z ]*$/", $hheader)) {
+      $error_msg['hname'] = "Invalid header name format";
+    }
+  }
+
+  // adress
+  if ($_POST['adress'] == "") {
+    $error_msg['adress'] = "Adress is required";
+  }
+
+  // room1
+  if ($_POST['room1'] == "") {
+    $error_msg['room1'] = "Room price is required";
+  } else {
+    $hheader = test_input($_POST['room1']);
+    // check if e-mail address is well-formed
+    if ((strlen($_POST['room1'])) > 3) {
+      $error_msg['room1'] = "maximum 3 digitt";
+    }
+  }
+
+  // room2
+  if ($_POST['room2'] == "") {
+    $error_msg['room2'] = "Room price is required";
+  } else {
+    $hheader = test_input($_POST['room2']);
+    // check if e-mail address is well-formed
+    if ((strlen($_POST['room2'])) > 3) {
+      $error_msg['room2'] = "maximum 3 digitt";
+    }
+  }
+
+  // room3
+  if ($_POST['room3'] == "") {
+    $error_msg['room3'] = "Room price is required";
+  } else {
+    $hheader = test_input($_POST['room3']);
+    // check if e-mail address is well-formed
+    if ((strlen($_POST['room3'])) > 3) {
+      $error_msg['room3'] = "maximum 3 digitt";
+    }
+  }
+
+  // description
+  if ($_POST['description'] == "") {
+    $error_msg['description'] = "description is required";
+  }
+
+  //img1
+  if (empty($_FILES['img1']['name'])) {
+    $error_msg['img1'] = "image is required";
+  } else {
+    $img1 = $_FILES['img1']['name'];
+    $allowed =  array('jpeg', 'jpg', "png", "gif", "bmp", "JPEG", "JPG", "PNG", "GIF", "BMP");
+    $ext = pathinfo($img1, PATHINFO_EXTENSION);
+    if (!in_array($ext, $allowed)) {
+      $error_msg['img1'] = "image is not valid";
+    }
+  }
+
+  //img2
+  if (empty($_FILES['img2']['name'])) {
+    $error_msg['img2'] = "image is required";
+  } else {
+    $img2 = $_FILES['img2']['name'];
+    $allowed =  array('jpeg', 'jpg', "png", "gif", "bmp", "JPEG", "JPG", "PNG", "GIF", "BMP");
+    $ext = pathinfo($img2, PATHINFO_EXTENSION);
+    if (!in_array($ext, $allowed)) {
+      $error_msg['img2'] = "image is not valid";
+    }
+  }
+
+  //img3
+  if (empty($_FILES['img3']['name'])) {
+    $error_msg['img3'] = "image is required";
+  } else {
+    $img3 = $_FILES['img3']['name'];
+    $allowed =  array('jpeg', 'jpg', "png", "gif", "bmp", "JPEG", "JPG", "PNG", "GIF", "BMP");
+    $ext = pathinfo($img3, PATHINFO_EXTENSION);
+    if (!in_array($ext, $allowed)) {
+      $error_msg['img3'] = "image is not valid";
+    }
+  }
+}
+function test_input($data)
+{
+  $data = trim($data);
+  $data = stripslashes($data);
+  $data = htmlspecialchars($data);
+  return $data;
+}
+// err
+if (isset($error_msg) == true) {
+  echo "die";
+} else {
+  include 'ownerdb.php';
+}
+
+?>
+
 <!doctype html>
 <html lang="en">
 
@@ -24,138 +160,6 @@
 </head>
 
 <body>
-
-
-  <!-- php strt  -->
-  <?php
-
-  // define variables and initialize with empty values
-
-  if (isset($_POST['submit'])) {
-
-    // viwer email
-    if ($_POST['vemail'] == "") {
-      $error_msg['vemail'] = "Viwer Email is required";
-    } else {
-      $vemail = test_input($_POST['vemail']);
-      // check if e-mail address is well-formed
-      if (!filter_var($vemail, FILTER_VALIDATE_EMAIL)) {
-        $error_msg['vemail'] = "Invalid email format";
-      }
-    }
-
-    // hotel email
-    if ($_POST['hemail'] == "") {
-      $error_msg['hemail'] = "Hotel Email is required";
-    } else {
-      $hemail = test_input($_POST['hemail']);
-      // check if e-mail address is well-formed
-      if (!filter_var($hemail, FILTER_VALIDATE_EMAIL)) {
-        $error_msg['hemail'] = "Invalid email format";
-      }
-    }
-
-    // header
-    if ($_POST['hheader'] == "") {
-      $error_msg['hheader'] = "Name is required";
-    } else {
-      $hheader = test_input($_POST['hheader']);
-      // check if e-mail address is well-formed
-      if (!preg_match("/^[a-zA-Z ]*$/", $hheader)) {
-        $error_msg['hname'] = "Invalid header name format";
-      }
-    }
-
-    // adress
-    if ($_POST['adress'] == "") {
-      $error_msg['adress'] = "Adress is required";
-    }
-
-    // room1
-    if ($_POST['room1'] == "") {
-      $error_msg['room1'] = "Room price is required";
-    } else {
-      $hheader = test_input($_POST['room1']);
-      // check if e-mail address is well-formed
-      if ((strlen($_POST['room1'])) > 3) {
-        $error_msg['room1'] = "maximum 3 digitt";
-      }
-    }
-
-    // room2
-    if ($_POST['room2'] == "") {
-      $error_msg['room2'] = "Room price is required";
-    } else {
-      $hheader = test_input($_POST['room2']);
-      // check if e-mail address is well-formed
-      if ((strlen($_POST['room2'])) > 3) {
-        $error_msg['room2'] = "maximum 3 digitt";
-      }
-    }
-
-    // room3
-    if ($_POST['room3'] == "") {
-      $error_msg['room3'] = "Room price is required";
-    } else {
-      $hheader = test_input($_POST['room3']);
-      // check if e-mail address is well-formed
-      if ((strlen($_POST['room3'])) > 3) {
-        $error_msg['room3'] = "maximum 3 digitt";
-      }
-    }
-
-    // description
-    if ($_POST['description'] == "") {
-      $error_msg['description'] = "description is required";
-    }
-
-    //img1
-    if (empty($_FILES['img1']['name'])) {
-      $error_msg['img1'] = "image is required";
-    } else {
-      $img1 = $_FILES['img1']['name'];
-      $allowed =  array('jpeg', 'jpg', "png", "gif", "bmp", "JPEG", "JPG", "PNG", "GIF", "BMP");
-      $ext = pathinfo($img1, PATHINFO_EXTENSION);
-      if (!in_array($ext, $allowed)) {
-        $error_msg['img1'] = "image is not valid";
-      }
-    }
-
-    //img2
-    if (empty($_FILES['img2']['name'])) {
-      $error_msg['img2'] = "image is required";
-    } else {
-      $img2 = $_FILES['img2']['name'];
-      $allowed =  array('jpeg', 'jpg', "png", "gif", "bmp", "JPEG", "JPG", "PNG", "GIF", "BMP");
-      $ext = pathinfo($img2, PATHINFO_EXTENSION);
-      if (!in_array($ext, $allowed)) {
-        $error_msg['img2'] = "image is not valid";
-      }
-    }
-
-    //img3
-    if (empty($_FILES['img3']['name'])) {
-      $error_msg['img3'] = "image is required";
-    } else {
-      $img3 = $_FILES['img3']['name'];
-      $allowed =  array('jpeg', 'jpg', "png", "gif", "bmp", "JPEG", "JPG", "PNG", "GIF", "BMP");
-      $ext = pathinfo($img3, PATHINFO_EXTENSION);
-      if (!in_array($ext, $allowed)) {
-        $error_msg['img3'] = "image is not valid";
-      }
-    }
-  }
-
-  function test_input($data)
-  {
-    $data = trim($data);
-    $data = stripslashes($data);
-    $data = htmlspecialchars($data);
-    return $data;
-  }
-
-  ?>
-  <!-- php end -->
 
   <!-- header  -->
   <header>
@@ -379,13 +383,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
-  <!-- massage check -->
   <?php
-  if (isset($error_msg) == true) {
-    die();
-  } else {
-    include 'ownerdb.php';
-  }
+
   ?>
 </body>
 

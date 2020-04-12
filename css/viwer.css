@@ -1,0 +1,134 @@
+@import url(https://fonts.googleapis.com/css?family=Lato);
+@import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css);
+
+body{
+    font-family: 'Roboto', sans-serif;
+    background-color: rgba(238, 238, 238, 0.363);
+}
+
+header{
+    background-image: url(../images/Path\ 3.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 600.81px;
+    width: 100%;
+}
+
+.myNavbar{
+    padding-top: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    font-size: 1rem;
+}
+
+
+
+.head2{
+    display: flex;
+    align-items: center;
+}
+
+/* nav a tag */
+.n-item{
+    margin-left: 1.5rem;
+}
+
+.n-item a{
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+}
+
+/* nav btn */
+.btn1{
+    box-shadow:inset 0px 1px 0px 0px #e89325;
+	background-color: #fa8e36;
+	border-radius:.3rem;
+	border:1px solid #e97414;
+	cursor:pointer;
+	color:#ffffff;
+	padding:.6rem 1rem;
+	text-decoration:none;
+    text-shadow:0px 1px 0px #855d29;
+}
+
+.btn1:hover{
+    background-color: #e6702d;
+    transition: .5s;
+}
+
+
+/* main */
+main{
+    margin-bottom: 7rem;
+}
+.box {
+    background: #fff;
+    border-radius: 2px;
+    display: inline-block;
+    height: 425px;
+    margin: 2rem 1rem;
+    position: relative;
+    width: 300px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.12), 0 2px 3px rgba(0,0,0,0.24);
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+    align-items: center;
+  }
+  .box:hover {
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+  }
+
+  .info{
+      padding: 1rem;
+      font-size: .8rem;
+      padding-bottom: 0;
+  }
+  .box a {
+    background-color: rgb(15, 199, 15);
+    padding: 5px 10px;
+    text-decoration: none;
+    color: white;
+    text-align: right;
+    margin-bottom: 1rem;
+  }
+
+/* footer */
+.contact{
+    background-image: url(../images/Mask\ Group\ 2.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 280px;
+    width: 100%;
+
+}
+
+.footer-info{
+     display: flex;
+    align-items: center;
+    justify-content: start;
+}
+
+.information{
+    width: 50%;
+    margin-top: 5.5rem;
+    margin-left: 8rem;
+}
+
+.footer-logo{
+    margin-top: 3rem;
+}
+
+
+
+
+/* icon */
+i{
+    color: white;
+    height: 4rem;
+    width: auto;
+    margin-right: 10px;
+    
+}
+
+.information h4, p{
+    color: white;
+}
