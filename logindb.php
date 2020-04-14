@@ -27,27 +27,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $count = mysqli_num_rows($result);
 
     if ($count == 1) {
-        session_start();
+         session_start();
         $_SESSION["logemail"] = $email;
 
         if ($category == 'viwer') {
             header('Location: ' . 'viwer.php');
         } elseif ($category == 'hotel_owner') {
-            $sql2 = "SELECT * FROM hprofile";
+
+            $sql2 = "SELECT * FROM hprofile WHERE vemail= '$email'";
             $result2 = $conn->query($sql2);
+            $count2 = mysqli_num_rows($result2);
 
-            while ($row2 = mysqli_fetch_array($result2)) {
-                $vemail = $row2['vemail'];
-                session_start();
-                $_SESSION['vemail'] = $vemail;
-
-                if ($row2['vemail'] == $email) {
+            if ($count2 > 0){
                     header('Location: ' . 'profile.php');
                 } else {
                     header('Location: ' . 'owner.php');
                 }
-            }
-            
+
         } else {
             header('Location: ' . 'admin.php');
         }
@@ -59,3 +55,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     echo 'Error';
 }
 $conn->close();
+
+?>

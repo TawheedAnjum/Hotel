@@ -7,10 +7,10 @@ body{
 }
 
 header{
-    background-image: url(../images/Path\ 3.png);
+    background-image: url(../images/header2.png);
     background-size: contain;
     background-repeat: no-repeat;
-    height: 600.81px;
+    height: 796.68px;
     width: 100%;
 }
 
@@ -56,39 +56,62 @@ header{
     transition: .5s;
 }
 
+/* search */
+.search{
+    border: none;
+    padding: .8rem 1rem;
+    width: 450px;
+    border-radius: 3px;
+    margin-top: 1.6rem;
+
+}
+
+.submit{
+    border: none;
+    padding: .8rem 1.5rem;
+    border-radius: 3px;
+    margin-top: 1.6rem;
+    background-color: rgb(30, 185, 131);
+    color: white;
+}
+
+.submit:hover{
+    background-color: rgb(21, 151, 105);
+    transition: 1s;
+}
+
 
 /* main */
 main{
-    margin-bottom: 7rem;
+    margin-bottom: 9rem;
 }
 .box {
     background: #fff;
     border-radius: 2px;
+    margin: 1.7rem;
     display: inline-block;
-    height: 425px;
-    margin: 2rem 1rem;
-    position: relative;
-    width: 300px;
+    height: 425px !important;
+    width: 30%;
     box-shadow: 0 2px 4px rgba(0,0,0,0.12), 0 2px 3px rgba(0,0,0,0.24);
     transition: all 0.3s cubic-bezier(.25,.8,.25,1);
-    align-items: center;
   }
   .box:hover {
     box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
   }
 
   .info{
-      padding: 1rem;
+      padding:1rem;
       font-size: .8rem;
       padding-bottom: 0;
   }
+
   .box a {
     background-color: rgb(15, 199, 15);
     padding: 5px 10px;
     text-decoration: none;
     color: white;
-    text-align: right;
-    margin-bottom: 1rem;
+    /* text-align: right; */
+    /* margin-bottom: 1rem; */
   }
 
 /* footer */
@@ -96,7 +119,7 @@ main{
     background-image: url(../images/Mask\ Group\ 2.png);
     background-size: contain;
     background-repeat: no-repeat;
-    height: 280px;
+    height: 284px;
     width: 100%;
 
 }

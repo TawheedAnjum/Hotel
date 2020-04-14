@@ -15,14 +15,15 @@
 
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        if (isset($_POST['vemail']) && isset($_POST['hemail']) && isset($_POST['hheader']) && isset($_POST['adress']) && isset($_POST['room1']) && isset($_POST['room2']) && isset($_POST['room3']) && isset($_POST['description']) && isset($_FILES['img1']['name']) && isset($_FILES['img2']['name']) && isset($_FILES['img3']['name'])) {
+        if (isset($_POST['vemail']) && isset($_POST['hemail']) && isset($_POST['hname']) && isset($_POST['hphone']) && isset($_POST['adress']) && isset($_POST['area']) && isset($_POST['rmax']) && isset($_POST['rmin']) && isset($_POST['description']) && isset($_FILES['img1']['name']) && isset($_FILES['img2']['name']) && isset($_FILES['img3']['name'])) {
             $vemail = $_POST['vemail'];
             $hemail = $_POST['hemail'];
-            $hheader = $_POST['hheader'];
+            $hname = $_POST['hname'];
+            $hphone = $_POST['hphone'];
             $adress = $_POST['adress'];
-            $room1 = $_POST['room1'];
-            $room2 = $_POST['room2'];
-            $room3 = $_POST['room3'];
+            $area = $_POST['area'];
+            $rmax = $_POST['rmax'];
+            $rmin = $_POST['rmin'];
             $description = $_POST['description'];
             $img1 = $_FILES['img1']['name'];
             $img2 = $_FILES['img2']['name'];
@@ -33,9 +34,9 @@
         $target2 = "db_image/" . basename($img2);
         $target3 = "db_image/" . basename($img3);
 
-        $sql = "INSERT INTO hprofile (vemail, hemail, hheader, adress, room1, room2, room3, description, img1, img2, img3 ) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+        $sql = "INSERT INTO hprofile (vemail, hemail, hname, hphone, adress, area, rmax, rmin, description, img1, img2, img3 ) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
         $stmtinsert = $conn->prepare($sql);
-        $stmtinsert->bind_param("sssssssssss", $vemail, $hemail, $hheader, $adress, $room1, $room2, $room3, $description, $img1, $img2, $img3);
+        $stmtinsert->bind_param("ssssssssssss", $vemail, $hemail, $hname, $hphone, $adress, $area, $rmax, $rmin, $description, $img1, $img2, $img3);
         $result = $stmtinsert->execute();
 
         //img upload

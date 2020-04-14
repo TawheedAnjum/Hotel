@@ -11,45 +11,53 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 
-<body>
+<body onload='search()'>
+
+<script>
+        if (window.XMLHttpRequest) {
+            // code for modern browsers
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for old IE browsers
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+
+        function search() {
+            var str =  document.getElementById('name');
+            if (str.value == '') {
+                document.getElementById("output").innerHTML = "*";
+                return;
+            } else {
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        document.getElementById("output").innerHTML = this.responseText;
+                    }
+                };
+                xmlhttp.open("GET", "html.php?q=" +str, true);
+                xmlhttp.send();
+            }
+        }
+    </script>
+
+    <form>
+        <input type="text" name="name" id="name" onkeyup="search()">
+    </form>
+
+    <div id='output'></div>
+
+    
 
     <?php
-
-
-        session_start();
-        echo $_SESSION['vemail'];
-    // if (!isset($_COOKIE['hotel'])) {
-
-        // $servername = "localhost";
-        // $username = "root";
-        // $password = "";
-        // $dbname = 'hotel';
-
-        // // Create connection
-        // $conn = mysqli_connect($servername, $username, $password, $dbname);
-
-        // //Check connection
-        // if (!$conn) {
-        //     die("Connection failed: " . mysqli_connect_error());
+        // if(!isset("name"))
+        // {
+        //     echo "not";
+        // }
+        // else{
+        //     include 'waste.php';
         // }
 
-
-        // $sql = "SELECT * FROM hprofile";
-        // $result = mysqli_query($conn, $sql);
-        // while ($row3 = mysqli_fetch_array($result)) {
-        //     echo $row3['hheader'];
-        //     echo "<img src='db_image/" . $row3['img1'] . "' height='200px' weight='auto' >";
-        // }
-
-        echo "ok";
-
-        //  mysqli_close($conn);
-        session_destroy();
-    // }
     ?>
-
-
-
 
 
 

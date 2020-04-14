@@ -29,13 +29,24 @@ if (isset($_POST['submit'])) {
   }
 
   // header
-  if ($_POST['hheader'] == "") {
-    $error_msg['hheader'] = "Name is required";
+  if ($_POST['hname'] == "") {
+    $error_msg['hname'] = "Name is required";
   } else {
-    $hheader = test_input($_POST['hheader']);
+    $hname = test_input($_POST['hname']);
     // check if e-mail address is well-formed
-    if (!preg_match("/^[a-zA-Z ]*$/", $hheader)) {
-      $error_msg['hname'] = "Invalid header name format";
+    if (!preg_match("/^[a-zA-Z ]*$/", $hname)) {
+      $error_msg['hname'] = "Invalid name format";
+    }
+  }
+
+   // Phone
+   if ($_POST['hphone'] == "") {
+    $error_msg['hphone'] = "Phone number required";
+  } else {
+    $hphone = test_input($_POST['hphone']);
+    // check if e-mail address is well-formed
+    if ((strlen($_POST['hphone'])) != 11) {
+      $error_msg['hphone'] = "11 digit required";
     }
   }
 
@@ -44,36 +55,36 @@ if (isset($_POST['submit'])) {
     $error_msg['adress'] = "Adress is required";
   }
 
-  // room1
-  if ($_POST['room1'] == "") {
-    $error_msg['room1'] = "Room price is required";
+  // area
+  if ($_POST['area'] == "") {
+    $error_msg['area'] = "Area is required";
   } else {
-    $hheader = test_input($_POST['room1']);
+    $area = test_input($_POST['area']);
     // check if e-mail address is well-formed
-    if ((strlen($_POST['room1'])) > 3) {
-      $error_msg['room1'] = "maximum 3 digitt";
+    if (!preg_match("/^[a-zA-Z ]*$/", $area)) {
+      $error_msg['area'] = "Invalid area format";
     }
   }
 
-  // room2
-  if ($_POST['room2'] == "") {
-    $error_msg['room2'] = "Room price is required";
+  // max
+  if ($_POST['rmax'] == "") {
+    $error_msg['rmax'] = "Maximum price required";
   } else {
-    $hheader = test_input($_POST['room2']);
+    $max = test_input($_POST['rmax']);
     // check if e-mail address is well-formed
-    if ((strlen($_POST['room2'])) > 3) {
-      $error_msg['room2'] = "maximum 3 digitt";
+    if ((strlen($_POST['rmax'])) > 4) {
+      $error_msg['rmax'] = "maximum 4 digitt";
     }
   }
 
-  // room3
-  if ($_POST['room3'] == "") {
-    $error_msg['room3'] = "Room price is required";
+  // min
+  if ($_POST['rmin'] == "") {
+    $error_msg['rmin'] = "Minimum price required";
   } else {
-    $hheader = test_input($_POST['room3']);
+    $min = test_input($_POST['rmin']);
     // check if e-mail address is well-formed
-    if ((strlen($_POST['room3'])) > 3) {
-      $error_msg['room3'] = "maximum 3 digitt";
+    if ((strlen($_POST['rmin'])) > 4) {
+      $error_msg['rmin'] = "maximum 4 digitt";
     }
   }
 
@@ -221,14 +232,23 @@ if (isset($error_msg) == true) {
         <table class="tab2">
           <tr>
             <th>
-              <label for="hheader">Header:</label><br>
-              <input type="text" id="hheader" name="hheader" style="width:510px">
+              <label for="hname">Hotel Name:</label><br>
+              <input type="text" id="hname" name="hname" style="width: 250px; margin-right: 10px">
+            </th>
+            <th>
+              <label for="hphone">Phone Number:</label><br>
+              <input type="number" id="hphone" name="hphone" style="width: 250px;">
             </th>
           </tr>
           <tr>
             <th style="color: red">
-              <?php if (isset($error_msg['hheader'])) {
-                echo $error_msg['hheader'];
+              <?php if (isset($error_msg['hname'])) {
+                echo $error_msg['hname'];
+              }  ?>
+            </th>
+            <th style="color: red">
+              <?php if (isset($error_msg['hphone'])) {
+                echo $error_msg['hphone'];
               }  ?>
             </th>
           </tr>
@@ -253,38 +273,38 @@ if (isset($error_msg) == true) {
         <table class="tab4">
           <tr>
             <th>
-              <label for="room1">Room 1 Price:</label><br>
-              <input type="number" id="room1" name="room1" style="width: 166.67px; margin-right:5px;">
+              <label for="area">Area / State:</label><br>
+              <input type="text" id="area" name="area" style="width: 166.67px; margin-right:5px;">
             </th>
             <th>
-              <label for="room2">Room 2 Price:</label><br>
-              <input type="number" id="room2" name="room2" style="width: 166.67px; margin-right:5px;">
+              <label for="rmax">Maximum Price:</label><br>
+              <input type="number" id="rmax" name="rmax" style="width: 166.67px; margin-right:5px;">
             </th>
             <th>
-              <label for="room3">Room 3 Price</label><br>
-              <input type="number" id="room3" name="room3" style="width: 166.67px;">
+              <label for="rmin">Minimum Price:</label><br>
+              <input type="number" id="rmin" name="rmin" style="width: 166.67px;">
             </th>
           </tr>
           <tr>
             <th style="color: red">
-              <?php if (isset($error_msg['room1'])) {
-                echo $error_msg['room1'];
+              <?php if (isset($error_msg['area'])) {
+                echo $error_msg['area'];
               }  ?>
             </th>
             <th style="color: red">
-              <?php if (isset($error_msg['room2'])) {
-                echo $error_msg['room2'];
+              <?php if (isset($error_msg['rmax'])) {
+                echo $error_msg['rmax'];
               }  ?>
             </th>
             <th style="color: red">
-              <?php if (isset($error_msg['room3'])) {
-                echo $error_msg['room3'];
+              <?php if (isset($error_msg['rmin'])) {
+                echo $error_msg['rmin'];
               }  ?>
             </th>
           </tr>
         </table>
 
-        <table class="tab6">
+        <table class="tab5">
           <tr>
             <th>
               <label for="description">Hotel Description:</label><br>
@@ -300,7 +320,7 @@ if (isset($error_msg) == true) {
           </tr>
         </table>
 
-        <table class="tab5">
+        <table class="tab6">
           <tr>
             <th>
               <p style="background-color: #65C386; padding:5px; color:white; font-size:1rem; margin-top:10px;">Upload image</p>

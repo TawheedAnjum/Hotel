@@ -41,6 +41,7 @@
     </header>
 
     <?php
+    $id=($_GET['id']);
     $servername = "localhost";
     $username = "root";
     $password = "";
@@ -54,12 +55,8 @@
         die("Connection failed: " . mysqli_connect_error());
     }
 
-    session_start();
-    if(isset($_SESSION["logemail"])){
-    $vemail=$_SESSION["logemail"];
-    }
-    
-    $sql3 = "SELECT * FROM hprofile WHERE vemail='$vemail'";
+
+    $sql3 = "SELECT * FROM hprofile WHERE id=$id";
     $result3 = mysqli_query($conn, $sql3);
     while($row3 = mysqli_fetch_array($result3)){
 
@@ -84,7 +81,7 @@
                     <div align='right'>
                         <a href='#' style='background-color: rgb(230, 230, 230); color: black; margin-right: 5px;'>Free Wifi</a>
                         <a href='#'>Booking</a></div>
-                    <h4>" .$row3['hname']. "</h4>
+                    <h4>" .$row3['hheader']. "</h4>
                     <p>" . $row3['adress'] . "</p>
                 </div>
                 <div class='description'>
@@ -95,15 +92,15 @@
             <div class='body2'>
                 <b>Hotel Contact:</b>
                 <p style='margin-bottom: 1rem;'>
-                    Email: "  . $row3['hemail'] . " <br>
-                    Phone: " . $row3['hphone'] . "<br>
-                    Phone: " . $row3['area'] . "<br>
+                    Email:"  . $row3['hemail'] . " <br>
+                    Phone:" . $row3['vemail'] . "<br>
                     Adress:" . $row3['adress'] . "
                 </p>
                 <b>Room price</b>
                 <p style='margin-bottom: 1rem;'>
-                    Maximum Price:" . $row3['rmax'] . "<br>
-                    Minimum Price:" . $row3['rmin'] . "
+                    Room1:" . $row3['room1'] . "<br>
+                    Room1:" . $row3['room2'] . "<br>
+                    Room1:" . $row3['room3'] . "
                 </p>
 
                 <hr style='margin-bottom: .5rem;'>
@@ -114,8 +111,6 @@
 
     </main>
     "; }
-
-    $conn->close();
     ?>
 
     <!-- footer -->
@@ -150,7 +145,7 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
- <?php session_destroy(); ?>
+
 </body>
 
 </html>

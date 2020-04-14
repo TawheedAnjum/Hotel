@@ -23,7 +23,7 @@
 
 </head>
 
-<body>
+<body onload='search(this.value)'>
 
   <!-- header  -->
   <header>
@@ -39,13 +39,17 @@
           <div class="n-item button"><a href="register.php" class="btn1">Register</a></div>
         </div>
       </div>
-      <div class="page-header" style="color:white; text-align:center; margin-top:8rem">
+      <div class="page-header" style="color:white; text-align:center; margin-top:9rem">
         <h1>
           The Best Hotel Ticket From The Web
         </h1>
-        <h4 style="margin-top: 2rem">
+        <h4 style="margin-top: 1rem">
           The biggest source of hotel ticket online
         </h4>
+        <form autocomplete="off">
+          <input type="text" class="search" placeholder="Enter hotel booking area" name="name" id="name" onkeyup="search(this.value)">
+          <input type="submit" value="Search" class="submit ">
+        </form>
       </div>
     </div>
   </header>
@@ -53,10 +57,9 @@
 
 
   <!-- main -->
-  <main class="container">
+  <main class="container" id="output">
 
     <?php
-
     $servername = "localhost";
     $username = "root";
     $password = "";
@@ -71,22 +74,23 @@
     }
     $sql = "SELECT * FROM hprofile";
     $result = mysqli_query($conn, $sql);
-    while($row = mysqli_fetch_array($result)){
+    while ($row = mysqli_fetch_array($result)) {
 
-    echo "
+      echo "
     <div class='box'>
-      <img src='db_image/" . $row['img1'] . "' height='225px' width='300px' alt=''>
+      <img src='db_image/" . $row['img1'] . "' height='250px' width='100%' alt=''>
       <div class='info'>
         <div align='right' style='margin:.5rem'>
-          <a href='#'>Booking</a>
+          <a href='viwer_hotel_profile.php?id=" . $row['id'] . "'>Booking</a>
         </div>
-        <h4>" . $row['hheader'] . "</h4>"
-        . $row['adress'] .
-      "</div>
+        <h4>" . $row['hname'] . "</h4>
+        <p style='color:black'>" . $row['adress'] . "</p>
+      </div>
     </div> ";
     }
     ?>
   </main>
+  
 
   <!-- footer -->
   <footer>
@@ -121,9 +125,33 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
-  <?php
+  <!-- live search -->
+  <script>
+    if (window.XMLHttpRequest) {
+      // code for modern browsers
+      xmlhttp = new XMLHttpRequest();
+    } else {
+      // code for old IE browsers
+      xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
 
-  ?>
+    function search(str) {
+      // var str =  document.getElementById('name');
+      if (str.value == '') {
+        document.getElementById("output");
+        return;
+      } else {
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+            document.getElementById("output").innerHTML = this.responseText;
+          }
+        };
+        xmlhttp.open("GET", "html.php?q=" + str, true);
+        xmlhttp.send(null);
+      }
+    }
+  </script>
 </body>
 
 </html>
