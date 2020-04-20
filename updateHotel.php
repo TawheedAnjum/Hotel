@@ -77,10 +77,10 @@ if (isset($_GET['hedit'])) :
             <img src="images/logo.svg" alt="logo" height="40px" width="auto">
           </div>
           <div class="head2">
-            <div class="n-item"><a href="index.html">Home</a></div>
-            <div class="n-item"><a href="#">Hotel Room</a></div>
-            <div class="n-item"><a href="">Contact</a></div>
-            <div class="n-item button"><a href="register.php" class="btn1">Register</a></div>
+            <!-- <div class="n-item"><a href="index.html">Home</a></div> -->
+            <!-- <div class="n-item"><a href="#">Hotel Room</a></div> -->
+            <!-- <div class="n-item"><a href="">Contact</a></div> -->
+            <div class="n-item button"><a href="index.php" class="btn1">Logout</a></div>
           </div>
         </div>
         <div class="page-header" style="color:white; text-align:center; margin-top:8rem">

@@ -14,9 +14,6 @@ if (isset($_GET['redit'])) :
     $hname = $hrow['hname'];
     ?>
 
-
-    ?>
-
     <!doctype html>
     <html lang="en">
 
@@ -56,6 +53,7 @@ if (isset($_GET['redit'])) :
                             <th>Bokking2 From</th>
                             <th>Bokking2 To</th>
                             <th>Booking2 name:</th>
+                            <th>edit</th>
                             <th>Delete</th>
                         </tr>
                         <?php
@@ -73,18 +71,15 @@ if (isset($_GET['redit'])) :
                                 <th><?php echo $row['start2']; ?></th>
                                 <th><?php echo $row['end2']; ?></th>
                                 <th><?php echo $row['name2']; ?></th>
-                                
+                                <th> <a href="editroom2.php?redit=<?php echo $row['id'] ?>" class=save>edit</a></th>
                                 <th> <a href="editroomdb.php?rdelete=<?php echo $row['id'] ?>" class="delete"> Delete</a></th>
                             </tr>
+                        <?php endwhile ?>
 
-                        
                     </table>
                 </div>
 
 
-                <a href="editroom2.php?redit=<?php echo $row['id'] ?>" class=save>edit</a>
-
-                <?php endwhile ?>
 
 
 
