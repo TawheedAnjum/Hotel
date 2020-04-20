@@ -22,10 +22,6 @@ if (isset($_GET['redit'])) :
 
     ?>
 
-
-
-
-
     <!doctype html>
     <html lang="en">
 
@@ -37,6 +33,18 @@ if (isset($_GET['redit'])) :
 
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+
+        <!-- my css -->
+        <link rel="stylesheet" href="css/editroom.css">
+
+        <!-- font -->
+        <link href="https://fonts.googleapis.com/css?family=Cookie|Montez|Norican|Roboto&display=swap" rel="stylesheet">
+        <!-- font-family: 'Roboto', sans-serif;
+    font-family: 'Cookie', cursive;
+    font-family: 'Norican', cursive;
+    font-family: 'Montez', cursive; -->
+
     </head>
 
     <body>

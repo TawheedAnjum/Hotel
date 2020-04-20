@@ -11,6 +11,7 @@ if (isset($_GET['hedit'])) :
   $result = $conn->query($sql);
 
   $row = $result->fetch_assoc();
+  $id = $row['id'];
   $vemail = $row['vemail'];
   $hemail = $row['hemail'];
   $hname = $row['hname'];
@@ -25,22 +26,16 @@ if (isset($_GET['hedit'])) :
   $img3 = $row['img3'];
 
   if (isset($_POST['update'])) {
+    $vemail = $_POST['vemail'];
+    $hemail = $_POST['hemail'];
+    $hname = $_POST['hname'];
+    $hphone = $_POST['hphone'];
+    $adress = $_POST['adress'];
+    $area = $_POST['area'];
+    $rmax = $_POST['rmax'];
+    $rmin = $_POST['rmin'];
 
-    $row = $result->fetch_assoc();
-    $vemail = $row['vemail'];
-    $hemail = $row['hemail'];
-    $hname = $row['hname'];
-    $hphone = $row['hphone'];
-    $adress = $row['adress'];
-    $area = $row['area'];
-    $rmax = $row['rmax'];
-    $rmin = $row['rmin'];
-    $description = $row['description'];
-    $img1 = $row['img1'];
-    $img2 = $row['img2'];
-    $img3 = $row['img3'];
-
-    $sql = "UPDATE hprofile SET vemail='$vemail', hemail='$hemail', hname='$hname', hphone='$hphone' , adress='$adress'. area='$area', rmax='$rmax', rmin='$rmin', description='$description', img1='$img1', img2='$img2', img3='$img3' WHERE id='$id'";
+    $sql = "UPDATE hprofile SET vemail='$vemail', hemail='$hemail', hname='$hname', hphone='$hphone' , adress='$adress'. area='$area', rmax='$rmax', rmin='$rmin' WHERE id='$id'";
     $result = $conn->query($sql);
   }
 
@@ -104,11 +99,12 @@ if (isset($_GET['hedit'])) :
     <!-- main -->
     <main class="container">
       <div class="form-body">
-        <form action="" method="post" enctype="multipart/form-data">
+        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" enctype="multipart/form-data">
 
           <table class="tab1">
             <tr>
               <th>
+              <input type="hidden" id="" name="id" value="<?php echo $id ?>">
                 <label for="vemail">Viwer Email:</label><br>
                 <input type="email" id="vemail" name="vemail" value="<?php echo $vemail ?>" style="width: 250px; margin-right: 10px">
               </th>
@@ -154,34 +150,6 @@ if (isset($_GET['hedit'])) :
               <th>
                 <label for="rmin">Minimum Price:</label><br>
                 <input type="number" id="rmin" name="rmin" value="<?php echo $rmin; ?>" style="width: 166.67px;">
-              </th>
-            </tr>
-          </table>
-
-          <table class="tab5">
-            <tr>
-              <th>
-                <label for="description">Hotel Description:</label><br>
-                <textarea name="description" rows="5" cols="50" placeholder="Enter updated description or defoult will as before description" value="<?php echo $description; ?>" style="width: 510px"></textarea>
-              </th>
-            </tr>
-          </table>
-
-          <table class="tab6">
-            <tr>
-              <th>
-                <p style="background-color: #65C386; padding:5px; color:white; font-size:1rem; margin-top:10px;">Upload image</p>
-              </th>
-            </tr>
-            <tr>
-              <th>
-                <input type="file" id="img1" name="img1" value="<?php echo $img1; ?>" style="width: 166.67px; margin-right:5px;">
-              </th>
-              <th>
-                <input type="file" id="img2" name="img2" value="<?php echo $img2; ?>" style="width: 166.67px; margin-right:5px;">
-              </th>
-              <th>
-                <input type="file" id="img3" name="img3" value="<?php echo $img3; ?>" style="width: 166.67px;">
               </th>
             </tr>
           </table>
