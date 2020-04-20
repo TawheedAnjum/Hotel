@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <!-- my css -->
-    <link rel="stylesheet" href="css/html.css">
+    <link rel="stylesheet" href="css/profile.css">
 
     <!-- font -->
     <link href="https://fonts.googleapis.com/css?family=Cookie|Montez|Norican|Roboto&display=swap" rel="stylesheet">
@@ -30,10 +30,10 @@
                     <img src="images/logo.svg" alt="logo" height="40px" width="auto">
                 </div>
                 <div class="head2">
-                    <div class="n-item"><a href="index.html">Home</a></div>
-                    <div class="n-item"><a href="#">Hotel Room</a></div>
-                    <div class="n-item"><a href="">Contact</a></div>
-                    <div class="n-item button"><a href="register.php" class="btn1" style="color: white;">Register</a>
+                    <!-- <div class="n-item"><a href="index.html">Home</a></div> -->
+                    <div class="n-item"><a href="login.php">Login/a></div>
+                    <!-- <div class="n-item"><a href="">Contact</a></div> -->
+                    <div class="n-item button"><a href="index.php" class="btn1" style="color: white;">logout</a>
                     </div>
                 </div>
             </div>
@@ -55,15 +55,15 @@
     }
 
     session_start();
-    if(isset($_SESSION["logemail"])){
-    $vemail=$_SESSION["logemail"];
+    if (isset($_SESSION["logemail"])) {
+        $vemail = $_SESSION["logemail"];
     }
-    
+
     $sql3 = "SELECT * FROM hprofile WHERE vemail='$vemail'";
     $result3 = mysqli_query($conn, $sql3);
-    while($row3 = mysqli_fetch_array($result3)){
+    $row3 = mysqli_fetch_array($result3);
 
-    echo "
+        echo "
     <main class='container'>
         <!-- hotel image -->
         <div class='img_body'>
@@ -82,9 +82,9 @@
             <div class='body1'>
                 <div class='header'>
                     <div align='right'>
-                        <a href='#' style='background-color: rgb(230, 230, 230); color: black; margin-right: 5px;'>Free Wifi</a>
-                        <a href='#'>Booking</a></div>
-                    <h4>" .$row3['hname']. "</h4>
+                        <a href='editroom.php?redit=". $row3['id'] ."' style='background-color: rgb(230, 230, 230); color: black; margin-right: 5px;'>Edit Room</a>
+                        <a href='updateHotel.php?hedit=". $row3['id'] ."'>Edit</a></div>
+                    <h4>" . $row3['hname'] . "</h4>
                     <p>" . $row3['adress'] . "</p>
                 </div>
                 <div class='description'>
@@ -113,10 +113,34 @@
         </div>
 
     </main>
-    "; }
-
-    $conn->close();
+    ";
     ?>
+
+    <div class="conatiner">
+        <div class="room_div">
+            <div class="room_picture">
+                <!-- <img src="images/room_picture.jpg" alt=""  height="100%" weidth="100%"> -->
+            </div>
+
+            <div class="room">
+                <form action="profiledb.php" method="post">
+                    <Table>
+                        <tr> <th><input type="hidden" name="hname" value="<?php echo $row3['hname']; ?>" > </th></tr>
+                        <tr>
+                            <th>
+                                <label for="room">Enter Room1 Name:</label> <br>
+                                <input type="text" name="room" style="width: 200px">
+                            </th>
+                            <th>
+                                <label for="room" style="margin-left:5px; width: 80px;">Price:</label> <br>
+                                <input type="number" name="price" style="margin-left:5px; width: 80px;">
+                            </th>
+                        </tr>
+                        <tr> <th> <input type="submit" name="add" value="Add Room" class="publish"> </th></tr>
+                    </Table>
+            </div>
+        </div>
+    </div>
 
     <!-- footer -->
     <footer>
@@ -150,7 +174,6 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
- <?php session_destroy(); ?>
 </body>
 
 </html>

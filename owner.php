@@ -39,8 +39,8 @@ if (isset($_POST['submit'])) {
     }
   }
 
-   // Phone
-   if ($_POST['hphone'] == "") {
+  // Phone
+  if ($_POST['hphone'] == "") {
     $error_msg['hphone'] = "Phone number required";
   } else {
     $hphone = test_input($_POST['hphone']);
@@ -180,10 +180,10 @@ if (isset($error_msg) == true) {
           <img src="images/logo.svg" alt="logo" height="40px" width="auto">
         </div>
         <div class="head2">
-          <div class="n-item"><a href="index.html">Home</a></div>
-          <div class="n-item"><a href="#">Hotel Room</a></div>
-          <div class="n-item"><a href="">Contact</a></div>
-          <div class="n-item button"><a href="register.php" class="btn1">Register</a></div>
+          <!-- <div class="n-item"><a href="index.html">Home</a></div> -->
+          <div class="n-item"><a href="login.php">Login</a></div>
+          <!-- <div class="n-item"><a href="">Contact</a></div> -->
+          <div class="n-item button"><a href="index.php" class="btn1">Logot</a></div>
         </div>
       </div>
       <div class="page-header" style="color:white; text-align:center; margin-top:8rem">
@@ -355,20 +355,22 @@ if (isset($error_msg) == true) {
             </th>
           </tr>
         </table>
-        <table>
+        <table class="tab5">
           <tr>
-            <th><input type="submit" value="Publish" class="publish" name="submit"></th>
+            <th>
+              <input type="submit" value="Publish" class="publish" name="submit">
+            </th>
           </tr>
         </table>
-
-      </form>
     </div>
+    </form>
 
     <div class="travel-image">
       <img src="images/undraw_travelers_qlt1.svg" alt="" height="400px" width="auto">
     </div>
 
   </main>
+
 
   <!-- footer -->
   <footer>

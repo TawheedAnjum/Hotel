@@ -3,22 +3,19 @@
 
 body {
   font-family: "Roboto", sans-serif;
-  background-color: rgba(238, 238, 238, 0.363);
 }
 
+/* header */
 header {
-  background-image: url(../images/Path\ 3.png);
-  background-size: contain;
-  background-repeat: no-repeat;
-  height: 600.81px;
-  width: 100%;
+  background-color: #427dbb;
+  height: 60px;
+  font-size: 0.9rem;
 }
 
 .myNavbar {
-  padding-top: 1.5rem;
+  padding-top: 0.5rem;
   display: flex;
   justify-content: space-between;
-  font-size: 1rem;
 }
 
 .head2 {
@@ -37,6 +34,7 @@ header {
 }
 
 /* nav btn */
+
 .btn1 {
   box-shadow: inset 0px 1px 0px 0px #e89325;
   background-color: #fa8e36;
@@ -54,65 +52,38 @@ header {
   transition: 0.5s;
 }
 
+/* navbar end */
+
 /* main */
-main {
-  background-color: #ffffff;
-  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.109), 0 6px 6px rgba(0, 0, 0, 0.23);
-  margin-bottom: 10rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 4rem;
+
+/* submit */
+main{
+    margin: 4rem 0;
 }
 
-table {
-  margin-bottom: 20px;
-  font-size: 0.9rem;
-  color: rgb(77, 77, 77);
-}
-
-.form-body {
-  padding-left: 4rem;
-}
-
-.travel-image {
-  padding-right: 4rem;
-}
-
-/* room */
-.room_div {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-left: 10rem;
-}
-
-.room {
+.booking {
   background: #fff;
   border-radius: 2px;
   display: inline-block;
   min-height: 300px;
-  min-width: 300px;
   position: relative;
-  right: 15rem;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-
-  padding: 3rem 7rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+  padding: 3rem 5rem;
 }
 
-.room_picture {
-  background-color: #6C63FF;
-  background-size: cover;
-  height: 500px;
-  width: 700px;
+.booking{
+    display: flex;
+    justify-content: space-between;
+    margin: 2rem 6rem;
+    align-items: center;
 }
 
-/* submit */
 .publish {
   background-color: #6159e6;
   color: white;
   border: 1px rgb(90, 83, 218);
-  padding: 8px 30px;
+  padding: 6px 27px;
   font-size: 1rem;
   border-radius: 0.3rem;
 }
@@ -121,29 +92,28 @@ table {
   background-color: rgb(60, 52, 209);
   transition: 0.5s;
 }
+
 /* footer */
 .contact {
-  background-image: url(../images/Mask\ Group\ 2.png);
-  background-size: contain;
-  background-repeat: no-repeat;
-  height: 280px;
-  width: 100%;
+  margin-top: 2rem;
+  background-color: #427dbb;
+  min-height: 50px;
 }
 
 .footer-info {
   display: flex;
   align-items: center;
-  justify-content: start;
+  justify-content: space-between;
+  padding: 5rem;
 }
 
 .information {
   width: 50%;
-  margin-top: 5.5rem;
-  margin-left: 8rem;
 }
 
 .footer-logo {
-  margin-top: 3rem;
+  position: relative;
+  bottom: 2rem;
 }
 
 /* icon */
@@ -155,6 +125,6 @@ i {
 }
 
 .information h4,
-p {
+.foot_p {
   color: white;
 }

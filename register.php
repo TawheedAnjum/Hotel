@@ -65,103 +65,36 @@ font-family: 'Montez', cursive; -->
         </div>
     </div>
 
-    <!-- php start -->
-    <?php
 
-    if (isset($_POST['register'])) {
-        // viwer email
-        if ($_POST['email'] == "") {
-            $error_msg['email'] = "Email is required";
-        } else {
-            $email = test_input($_POST['email']);
-            // check if e-mail address is well-formed
-            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                $error_msg['email'] = "Invalid email format";
-            }
-        }
-
-        // password
-        if ($_POST['password'] == "") {
-            $error_msg['password'] = "Password is required";
-        }
-
-        // conpassword
-        if ($_POST['conpassword'] == "") {
-            $error_msg['conpassword'] = "Confirm Password is required";
-        } elseif ($_POST['password'] != $_POST['conpassword']) {
-
-            $error_msg['conpassword'] = "Password not match";
-        } 
-
-        // date
-        if ($_POST['date'] == "") {
-            $error_msg['date'] = "Date is required";
-        }
-
-        // number
-        if ($_POST['number'] == "") {
-            $error_msg['number'] = "Number is required";
-        } else {
-            $number = test_input($_POST['number']);
-            // check if e-mail address is well-formed
-            if ((strlen($_POST['number'])) != 11) {
-                $error_msg['number'] = "maximum 11 digitt";
-            }
-        }
-
-        // catagory
-        if ($_POST['category'] == "emp") {
-            $error_msg['category'] = "Select category";
-        }
-    }
-
-    function test_input($data)
-    {
-        $data = trim($data);
-        $data = stripslashes($data);
-        $data = htmlspecialchars($data);
-        return $data;
-    }
-
-    ?>
-
-    <!-- php end -->
 
     <!-- login frame -->
     <div class="container">
         <div class="login-frame">
-            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+            <form action="registerdb.php" onsubmit="return validation()" method="post">
                 <table>
                     <tr>
                         <th>
                             <div class="tab">
                                 <input type="email" name="email" id="email" placeholder="email" autofocus /><br>
-                                <span style="color: red">
-                                    <?php if (isset($error_msg['email'])) {
-                                        echo $error_msg['email'];
-                                    }  ?></span>
+                                <span id="erremail" style="color: red">
+                                </span>
                             </div>
                         </th>
                     </tr>
                     <tr>
                         <th>
                             <div class="tab">
-                                <input type="password" id="passwod" name="password" placeholder="password" />
-                                <span style="color: red">
-                                    <?php if (isset($error_msg['password'])) {
-                                        echo $error_msg['password'];
-                                    }  ?></span>
-                            </div>
+                                <input type="password" id="password" name="password" placeholder="password" />
+                                <span id="errpassword" style="color: red"></span>
+
                         </th>
                     </tr>
                     <tr>
                         <th>
                             <div class="tab">
-                                <input type="password" name="conpassword" placeholder="confirm password" />
-                                <span style="color: red">
-                                    <?php if (isset($error_msg['conpassword'])) {
-                                        echo $error_msg['conpassword'];
-                                    }  ?></span>
+                                <input type="password" name="conpassword"  id="conpassword" placeholder="confirm password" />
+                                <span id="errconpassword" style="color: red">
+                                </span>
                             </div>
                         </th>
                     </tr>
@@ -169,10 +102,8 @@ font-family: 'Montez', cursive; -->
                         <th>
                             <div class="tab">
                                 <input type="date" id="date" name="date" placeholder="date of birthd" />
-                                <span style="color: red">
-                                    <?php if (isset($error_msg['date'])) {
-                                        echo $error_msg['date'];
-                                    }  ?></span>
+                                <span id="errdate" style="color: red">
+                                </span>
                             </div>
                         </th>
                     </tr>
@@ -180,10 +111,8 @@ font-family: 'Montez', cursive; -->
                         <th>
                             <div class="tab">
                                 <input type="number" id="number" name="number" placeholder="phone number" />
-                                <span style="color: red">
-                                    <?php if (isset($error_msg['number'])) {
-                                        echo $error_msg['number'];
-                                    }  ?></span>
+                                <span id="errnumber" style="color: red">
+                                </span>
                             </div>
                         </th>
                     </tr>
@@ -196,10 +125,8 @@ font-family: 'Montez', cursive; -->
                                     <option value="viwer">viwer</option>
                                     <option value="hotel_owner">hotel owner</option>
                                 </select>
-                                <span style="color: red">
-                                    <?php if (isset($error_msg['category'])) {
-                                        echo $error_msg['category'];
-                                    }  ?></span>
+                                <span id="errcategory" style="color: red">
+                                </span>
                             </div>
                         </th>
                     </tr>
@@ -210,7 +137,7 @@ font-family: 'Montez', cursive; -->
                     </tr>
                     <tr>
                         <th>
-                            <input type="submit" value="Register" name="register" class="register">
+                            <input type="submit" value="Register" name="submit" class="register">
                         </th>
                     </tr>
                 </table>
@@ -225,15 +152,65 @@ font-family: 'Montez', cursive; -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
+    <script>
+        function validation() {
 
-    <!-- massage check -->
-    <?php
-    if (isset($error_msg) == true) {
-        die();
-    } else {
-        include 'registerdb.php';
-    }
-    ?>
+            var email = document.getElementById('email').value;
+            var password = document.getElementById('password').value;
+            var conpassword = document.getElementById('conpassword').value;
+            var date = document.getElementById('date').value;
+            var number= document.getElementById('number').value;
+            var category= document.getElementById('category').value;
+
+
+            if (email == "") {
+                document.getElementById('erremail').innerHTML="Enater email";
+                return false;
+            }
+
+            if (password == "") {
+                document.getElementById('errpassword').innerHTML="Enater password";
+                return false;
+            }
+
+            if (password.length<4) {
+                document.getElementById('errpassword').innerHTML="Enater 4 degit password";
+                return false;
+            }
+
+            if (conpassword == "") {
+                document.getElementById('errconpassword').innerHTML="Enater confirm password";
+                return false;
+            }
+
+            if (password != conpassword) {
+                document.getElementById('errconpassword').innerHTML="Confirm password do not match";
+                return false;
+            }
+
+            if (date == "") {
+                document.getElementById('errdate').innerHTML="Enater date";
+                return false;
+            }
+
+            if (number == "") {
+                document.getElementById('errnumber').innerHTML="Enater Mobile Number";
+                return false;
+            }
+
+            if (number.length != 11) {
+                document.getElementById('errnumber').innerHTML="Enater 11 digit";
+                return false;
+            }
+
+            if (category == "---") {
+                document.getElementById('errcategory').innerHTML="Select catagory";
+                return false;
+            }
+            
+        }
+    </script>
+
 </body>
 
 </html>

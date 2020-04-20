@@ -27,7 +27,7 @@
       <img src='db_image/" . $row['img1'] . "' height='250px' width='100%' alt=''>
       <div class='info'>
         <div align='right' style='margin:.5rem'>
-          <a href='viwer_hotel_profile.php?id=" . $row['id'] . "'>Booking</a>
+          <a href='viwer_hotel_profile.php?id=" . $row['id'] . "'>Select</a>
         </div>
         <h4>" . $row['hname'] . "</h4>
         <p style='color:black'>" . $row['adress'] . "</p>

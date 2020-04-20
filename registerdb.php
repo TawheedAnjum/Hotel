@@ -35,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $result = $stmtinsert->execute();
     if ($result) {
         echo 'Successfully registered.';
-        header('Location: ' . 'hotel.php');
+        header('Location: ' . 'login.php');
     } else {
         echo "There were erros while registering. Please <a href='register.php'>Retry</a>";
     }

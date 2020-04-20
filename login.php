@@ -78,7 +78,7 @@
                     <tr>
                         <th> <input type="password" name="password" placeholder="password" /></th>
                     </tr>
-                    <tr>
+                    <!-- <tr>
                         <th>
                             <span class="choose"> Choose your category :</span>
                             <select id="category" name="category" class="category">
@@ -87,7 +87,7 @@
                                 <option value="admin">admin</option>
                             </select>
                         </th>
-                    </tr>
+                    </tr> -->
                     <tr>
                         <th style="color: white"><input type="submit" value="Login" class="login"></th>
                     </tr>

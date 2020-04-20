@@ -1,46 +1,45 @@
- <?php
-   $servername = "localhost";
-   $username = "root";
-   $password = "";
-   $dbname = 'hotel';
+<?php
 
-   // Create connection
-   $conn = mysqli_connect($servername, $username, $password, $dbname);
+$servername = 'localhost';
+$username = 'root';
+$password = '';
+$dbname = 'hotel';
 
-   //Check connection
-   if (!$conn) {
-       die("Connection failed: " . mysqli_connect_error());
-   }
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
 
-    if (isset($_GET['q'])) {
-        $str = $_GET['q'];
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
 
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (isset($_POST['email']) && isset($_POST['password']) && isset($_POST['conpassword']) && isset($_POST['date']) && isset($_POST['number']) && isset($_POST['category'])) {
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+        $conpassword = $_POST['conpassword'];
+        $date = $_POST['date'];
+        $number = $_POST['number'];
+        $category = $_POST['category'];
 
-        $sql = "SELECT * FROM hprofile WHERE area ='$str' or area LIKE '%$str' or area LIKE '$str%' or area LIKE '%$str%'";
-        $result = mysqli_query($conn, $sql);
-        $count = mysqli_num_rows($result);
-        if($count>0){
-        while ($row = mysqli_fetch_array($result)) {
-
-            echo "
-        <div class='box'>
-      <img src='db_image/" . $row['img1'] . "' height='250px' width='100%' alt=''>
-      <div class='info'>
-        <div align='right' style='margin:.5rem'>
-          <a href='viwer_hotel_profile.php?id=" . $row['id'] . "'>Booking</a>
-        </div>
-        <h4>" . $row['hname'] . "</h4>
-        <p style='color:black'>" . $row['adress'] . "</p>
-      </div>
-    </div> ";
-        }
     }
-    else{
-        echo "Hotel not found";
+
+    if ($password != $conpassword) {
+        echo "Password is not confirmed. Please <a href='register.php'>Retry</a>";
+        exit;
     }
+
+    $sql = "INSERT INTO user (email, password, date, number, category ) VALUES(?,?,?,?,?)";
+    $stmtinsert = $conn->prepare($sql);
+    $stmtinsert->bind_param("sssss", $email, $password, $date, $number, $category);
+    $result = $stmtinsert->execute();
+    if ($result) {
+        echo 'Successfully registered.';
+        header('Location: ' . 'hotel.php');
     } else {
-        echo "not";
+        echo "There were erros while registering. Please <a href='register.php'>Retry</a>";
     }
-
-    $conn->close();
-    ?>
+} else {
+    echo 'Error';
+}
+$conn->close();

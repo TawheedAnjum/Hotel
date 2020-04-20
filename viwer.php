@@ -36,7 +36,7 @@
           <div class="n-item"><a href="index.html">Home</a></div>
           <div class="n-item"><a href="#">Hotel Room</a></div>
           <div class="n-item"><a href="">Contact</a></div>
-          <div class="n-item button"><a href="register.php" class="btn1">Register</a></div>
+          <div class="n-item button"><a href="index.php" class="btn1">logout</a></div>
         </div>
       </div>
       <div class="page-header" style="color:white; text-align:center; margin-top:9rem">
@@ -72,6 +72,12 @@
     if (!$conn) {
       die("Connection failed: " . mysqli_connect_error());
     }
+
+    session_start();
+    if(isset($_SESSION['logemail'])){
+      $email= $_SESSION['logemail'];
+    }
+
     $sql = "SELECT * FROM hprofile";
     $result = mysqli_query($conn, $sql);
     while ($row = mysqli_fetch_array($result)) {
@@ -147,7 +153,7 @@
             document.getElementById("output").innerHTML = this.responseText;
           }
         };
-        xmlhttp.open("GET", "html.php?q=" + str, true);
+        xmlhttp.open("GET", "viwer2.php?q=" + str, true);
         xmlhttp.send(null);
       }
     }

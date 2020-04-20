@@ -14,38 +14,41 @@ if ($conn->connect_error) {
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if (isset($_POST['email']) && isset($_POST['password']) && isset($_POST['category'])) {
+    if (isset($_POST['email']) && isset($_POST['password'])) {
         $email = $_POST['email'];
         $password = $_POST['password'];
-        $category = $_POST['category'];
     }
+    
 
-    $sql = "SELECT * FROM user WHERE email='$email' AND password='$password'  AND category='$category'";
+    $sql = "SELECT * FROM user WHERE email='$email' AND password='$password'";
 
     //echo $sql;
     $result = $conn->query($sql);
     $count = mysqli_num_rows($result);
 
     if ($count == 1) {
-         session_start();
+        session_start();
         $_SESSION["logemail"] = $email;
 
-        if ($category == 'viwer') {
-            header('Location: ' . 'viwer.php');
-        } elseif ($category == 'hotel_owner') {
+        while ($row = $result->fetch_assoc()) {
+            $category = $row['category'];
+            if ($category == 'viwer') {
+                header('Location: ' . 'viwer.php');
+            } elseif ($category == 'hotel_owner') {
 
-            $sql2 = "SELECT * FROM hprofile WHERE vemail= '$email'";
-            $result2 = $conn->query($sql2);
-            $count2 = mysqli_num_rows($result2);
+                $sql2 = "SELECT * FROM hprofile WHERE vemail= '$email'";
+                $result2 = $conn->query($sql2);
+                $count2 = mysqli_num_rows($result2);
 
-            if ($count2 > 0){
+                if ($count2 > 0) {
                     header('Location: ' . 'profile.php');
                 } else {
                     header('Location: ' . 'owner.php');
                 }
-
-        } else {
-            header('Location: ' . 'admin.php');
+            } else {
+                setcookie("loggemail",$email,time()+120);
+                header('Location: ' . 'admin.php');
+            }
         }
     } else {
         echo "Login failed. Please <a href='loginw.php'>Retry</a>";

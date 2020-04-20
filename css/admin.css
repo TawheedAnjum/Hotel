@@ -1,0 +1,61 @@
+@import url(https://fonts.googleapis.com/css?family=Lato);
+@import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css);
+
+body{
+    font-family: 'Roboto', sans-serif;
+    background-color: rgba(238, 238, 238, 0.363);
+}
+
+.info th{
+    width: 100px;
+    padding: 1rem .5rem;
+    font-size: 1rem;
+}
+
+.info tr{
+    border: solid .6px rgba(0, 0, 0, 0.637);
+}
+
+
+
+.input{
+    width: 300px;
+    padding: .3rem 1rem;
+    border: .5px solid black;
+    margin-bottom: 10px;
+    margin-top: 5px;
+    background: white;
+}
+
+.save{
+    min-width: 20px;
+    background-color: #6159E6;
+    color: white;
+    border: 1px rgb(90, 83, 218);
+    padding: 8px 35px;
+    font-size: 1rem;
+    border-radius:.3rem;
+    margin: 10px 0 0 0;
+}
+
+.save:hover{
+    background-color: rgb(60, 52, 209);
+    transition: .5s;
+}
+
+.delete{
+    min-width: 20px;
+    background-color: rgb(233, 25, 25);
+    color: white;
+    border: 1px rgb(199, 7, 7);
+    padding: 8px 35px;
+    font-size: 1rem;
+    border-radius:.3rem;
+    margin: 10px 0 0 0;
+}
+
+.delete:hover{
+    background-color: rgb(167, 17, 17);
+    transition: .5s;
+    color: rgb(167, 17, 17);
+}
