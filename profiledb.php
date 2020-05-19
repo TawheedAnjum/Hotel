@@ -3,19 +3,21 @@ $conn = new mysqli('localhost', 'root', '', 'hotel') or die(mysqli_error($conn))
 
 
 if(isset($_POST['add'])){
-    $hname=$_POST['hname'];
+    $hotel_id=$_POST['hotel_id'];
     $room=$_POST['room'];
     $price=$_POST['price'];
+    $bed=$_POST['bed'];
+    $wifi=$_POST['wifi'];
 
-    $sql = "SELECT * FROM hroom WHERE hname='$hname' AND room='$room'";
+    $sql = "SELECT * FROM room WHERE hotel_id='$hotel_id' AND room_name='$room'";
     $result = $conn->query($sql);
     $count = mysqli_num_rows($result);
 
     if($count > 0 ){
-        echo "not possible";
+        header('Location: ' . 'profile.php?error');
     }
     else{
-        $sql = "INSERT INTO hroom (hname, room, price) VALUES('$hname', '$room', '$price' )";
+        $sql = "INSERT INTO room (hotel_id, room_name, price, bed, wifi) VALUES('$hotel_id', '$room', '$price', '$bed', '$wifi' )";
          $result = $conn->query($sql);
          header('Location: ' . 'profile.php');
     }

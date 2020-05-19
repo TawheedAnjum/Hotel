@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <!-- my css -->
-    <link rel="stylesheet" href="css/html.css">
+    <link rel="stylesheet" href="css/viwer_hotel_profile.css">
 
     <!-- font -->
     <link href="https://fonts.googleapis.com/css?family=Cookie|Montez|Norican|Roboto&display=swap" rel="stylesheet">
@@ -22,7 +22,6 @@
 </head>
 
 <body>
-
     <header>
         <div class="container">
             <div class="myNavbar">
@@ -52,10 +51,13 @@
         die("Connection failed: " . mysqli_connect_error());
     }
 
-    if (isset($_GET['id'])) {
+    if (isset($_GET['id'])) :
+    ?>
+
+        <?php
         $id = $_GET['id'];
 
-        $sql3 = "SELECT * FROM hprofile WHERE id='$id'";
+        $sql3 = "SELECT * FROM hotel_profile WHERE id='$id'";
         $result3 = mysqli_query($conn, $sql3);
         while ($row3 = mysqli_fetch_array($result3)) {
 
@@ -79,8 +81,8 @@
                 <div class='header'>
                     <div align='right'>
                         <a href='#' style='background-color: rgb(230, 230, 230); color: black; margin-right: 5px;'>Free Wifi</a>
-                        <a href='booking.php?hname=".$row3['hname']. "'>Booking</a></div>";
-            echo "<h4>" . $row3['hname'] . "</h4>
+                        <a href='#'>Parking</a></div>";
+            echo "<h4>" . $row3['name'] . "</h4>
                     <p>" . $row3['adress'] . "</p>
                 </div>
                 <div class='description'>
@@ -91,8 +93,8 @@
             <div class='body2'>
                 <b>Hotel Contact:</b>
                 <p style='margin-bottom: 1rem;'>
-                    Email: "  . $row3['hemail'] . " <br>
-                    Phone: " . $row3['hphone'] . "<br>
+                    Email: "  . $row3['hotel_email'] . " <br>
+                    Phone: " . $row3['phone'] . "<br>
                     Phone: " . $row3['area'] . "<br>
                     Adress:" . $row3['adress'] . "
                 </p>
@@ -111,44 +113,99 @@
     </main>
     ";
         }
-    }
+        ?>
 
-    $conn->close();
-    ?>
+        <!-- room -->
+        <div class="container room_flex mt-5">
+            <div class="room_position">
+                <!-- php -->
+                <?php
+                // image
+                $sql3 = "SELECT * FROM hotel_profile WHERE id='$id'";
+                $result3 = mysqli_query($conn, $sql3);
+                $row3 = mysqli_fetch_array($result3);
+                $img1 = $row3['img1'];
 
-    <!-- footer -->
-    <footer>
-        <div class="contact">
-            <div class="container">
-                <div class="footer-info">
-                    <div class="information">
-                        <h4> Contact Us</h4>
-                        <p class="foot_p">
-                            Email: hotel@gmail.com <br>
-                            Phone: 0123456789 <br>
-                        </p>
-                        <i class="fa fa-facebook"></i>
-                        <i class="fa fa-twitter"></i>
-                        <i class="fa fa-rss"></i>
-                        <i class="fa fa-youtube"></i>
-                        <i class="fa fa-linkedin"></i>
-                        <i class="fa fa-github"></i>
-                    </div>
+                // room
+                $room_sql = "SELECT * FROM room WHERE hotel_id='$id'";
+                $room_result = mysqli_query($conn, $room_sql);
+                while ($room_row = mysqli_fetch_array($room_result)) :
+                ?>
+                    <a href="booking.php?room_id=<?php echo $room_row['room_id']; ?>">
+                        <div class="room_info m-4">
 
-                    <div class="footer-logo">
-                        <img src="images/logo.svg" alt="" height="60px" width="auto">
+                            <div class="photo" style="padding: 10px;">
+                                <?php
+                                echo "<img src='db_image/" . $img1 . "' height='100px' width='140px' alt=''>";
+                                ?>
+                            </div>
+
+                            <div class="info_of_room">
+                                <div class="room_name">
+                                    <img src="images/room.svg" height="20px" width="20px" alt="" style="margin-right:5px;">
+                                    <?php echo $room_row['room_name'];  ?>
+                                </div>
+                                <div class="bed">
+                                    <img src="images/bed.svg" height="20px" width="20px" alt="" style="margin-right:5px;">
+                                    <?php echo $room_row['bed'];  ?>
+                                </div>
+                                <div class="wifi">
+                                    <img src="images/wifi.svg" height="20px" width="20px" alt="" style="margin-right:5px;">
+                                    <?php echo $room_row['wifi'] . " WIFI";  ?>
+                                </div>
+                            </div>
+
+                        </div>
+                    </a>
+                <?php endwhile ?>
+
+            </div>
+
+        </div>
+        </div>
+
+
+        <!-- footer -->
+        <footer>
+            <div class="contact">
+                <div class="container">
+                    <div class="footer-info">
+                        <div class="information">
+                            <h4> Contact Us</h4>
+                            <p class="foot_p">
+                                Email: hotel@gmail.com <br>
+                                Phone: 0123456789 <br>
+                            </p>
+                            <i class="fa fa-facebook"></i>
+                            <i class="fa fa-twitter"></i>
+                            <i class="fa fa-rss"></i>
+                            <i class="fa fa-youtube"></i>
+                            <i class="fa fa-linkedin"></i>
+                            <i class="fa fa-github"></i>
+                        </div>
+
+                        <div class="footer-logo">
+                            <img src="images/logo.svg" alt="" height="60px" width="auto">
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </footer>
+        </footer>
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <?php session_destroy(); ?>
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <script>
+        function sweet() {
+            swal("Room Bookeds", "You clicked the button!", "success");
+        }
+    </script>
+
 </body>
+<?php endif  ?>
 
 </html>

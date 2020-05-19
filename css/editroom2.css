@@ -1,0 +1,108 @@
+@import url(https://fonts.googleapis.com/css?family=Lato);
+@import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css);
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #F7F7F7;
+}
+
+
+/* header */
+
+header {
+    background-color: #427dbb;
+    height: 60px;
+    font-size: 0.9rem;
+}
+
+.myNavbar {
+    padding-top: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.head2 {
+    display: flex;
+    align-items: center;
+}
+
+
+/* nav a tag */
+
+.n-item {
+    margin-left: 1.5rem;
+}
+
+.n-item a {
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+}
+
+
+/* nav btn */
+
+.btn1 {
+    box-shadow: inset 0px 1px 0px 0px #e89325;
+    background-color: #fa8e36;
+    border-radius: 0.3rem;
+    border: 1px solid #e97414;
+    cursor: pointer;
+    color: #ffffff;
+    padding: 0.6rem 1rem;
+    text-decoration: none;
+    text-shadow: 0px 1px 0px #855d29;
+}
+
+.btn1:hover {
+    background-color: #e6702d;
+    transition: 0.5s;
+}
+
+
+/* navbar end */
+
+
+/* edit room */
+
+.card {
+    background: #fff;
+    border-radius: 2px;
+    display: inline-block;
+    margin: 5rem;
+}
+
+.edit_room {
+    min-height: 100px;
+    min-width: 50px;
+    padding: 4rem;
+}
+
+input {
+    margin-bottom: 1rem;
+    padding: .1rem .3rem;
+    width: 200px;
+}
+
+select {
+    margin-bottom: 1rem;
+    padding: .1rem .3rem;
+    width: 200px;
+}
+
+
+/* update */
+
+.update {
+    min-width: 20px;
+    background-color: #6159E6;
+    color: white;
+    border: 1px rgb(90, 83, 218);
+    padding: 8px 35px;
+    font-size: 1rem;
+    border-radius: .3rem;
+    margin: 10px 0 0 0;
+}
+
+.update:hover {
+    background-color: rgb(60, 52, 209);
+    transition: .5s;
+}

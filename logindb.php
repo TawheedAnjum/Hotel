@@ -1,5 +1,4 @@
 <?php
-
 $servername = 'localhost';
 $username = 'root';
 $password = '';
@@ -18,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $email = $_POST['email'];
         $password = $_POST['password'];
     }
-    
+
 
     $sql = "SELECT * FROM user WHERE email='$email' AND password='$password'";
 
@@ -36,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 header('Location: ' . 'viwer.php');
             } elseif ($category == 'hotel_owner') {
 
-                $sql2 = "SELECT * FROM hprofile WHERE vemail= '$email'";
+                $sql2 = "SELECT * FROM hotel_profile WHERE viwer_email= '$email'";
                 $result2 = $conn->query($sql2);
                 $count2 = mysqli_num_rows($result2);
 
@@ -46,17 +45,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     header('Location: ' . 'owner.php');
                 }
             } else {
-                setcookie("loggemail",$email,time()+120);
+                setcookie("logemail",$email,time()+120);
                 header('Location: ' . 'admin.php');
             }
         }
     } else {
-        echo "Login failed. Please <a href='loginw.php'>Retry</a>";
-        echo "<br>Not Registered? <a href='register.php'>Signup</a> for a new account";
+        header('Location: ' . 'login.php?error');
     }
-} else {
-    echo 'Error';
 }
 $conn->close();
-
-?>

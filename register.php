@@ -15,10 +15,7 @@
 
     <!-- font -->
     <link href="https://fonts.googleapis.com/css?family=Cookie|Montez|Norican|Roboto&display=swap" rel="stylesheet">
-    <!-- font-family: 'Roboto', sans-serif;
-font-family: 'Cookie', cursive;
-font-family: 'Norican', cursive;
-font-family: 'Montez', cursive; -->
+
 </head>
 
 <body>
@@ -65,7 +62,10 @@ font-family: 'Montez', cursive; -->
         </div>
     </div>
 
-
+    <!-- error -->
+    <?php if (isset($_GET['error'])) {
+        echo "<script>alert('email already registerd')</script>";
+    } ?>
 
     <!-- login frame -->
     <div class="container">
@@ -92,7 +92,7 @@ font-family: 'Montez', cursive; -->
                     <tr>
                         <th>
                             <div class="tab">
-                                <input type="password" name="conpassword"  id="conpassword" placeholder="confirm password" />
+                                <input type="password" name="conpassword" id="conpassword" placeholder="confirm password" />
                                 <span id="errconpassword" style="color: red">
                                 </span>
                             </div>
@@ -100,7 +100,7 @@ font-family: 'Montez', cursive; -->
                     </tr>
                     <tr>
                         <th>
-                            <div class="tab">
+                            <div class="tab"> 
                                 <input type="date" id="date" name="date" placeholder="date of birthd" />
                                 <span id="errdate" style="color: red">
                                 </span>
@@ -121,9 +121,9 @@ font-family: 'Montez', cursive; -->
                             <div class="tab">
                                 <span class="choose"> Choose your category :</span>
                                 <select id="category" name="category" class="category">
-                                    <option value="emp" selected>---</option>
-                                    <option value="viwer">viwer</option>
-                                    <option value="hotel_owner">hotel owner</option>
+                                    <option value="emp" value="0">None</option>
+                                    <option value="viwer" value="1">viwer</option>
+                                    <option value="hotel_owner" value="2">hotel owner</option>
                                 </select>
                                 <span id="errcategory" style="color: red">
                                 </span>
@@ -159,55 +159,64 @@ font-family: 'Montez', cursive; -->
             var password = document.getElementById('password').value;
             var conpassword = document.getElementById('conpassword').value;
             var date = document.getElementById('date').value;
-            var number= document.getElementById('number').value;
-            var category= document.getElementById('category').value;
+            var number = document.getElementById('number').value;
+            var category = document.getElementById('category').value;
+
+            var current = new Date();
 
 
             if (email == "") {
-                document.getElementById('erremail').innerHTML="Enater email";
+                document.getElementById('erremail').innerHTML = "Enater email";
                 return false;
             }
 
             if (password == "") {
-                document.getElementById('errpassword').innerHTML="Enater password";
+                document.getElementById('errpassword').innerHTML = "Enater password";
                 return false;
             }
 
-            if (password.length<4) {
-                document.getElementById('errpassword').innerHTML="Enater 4 degit password";
+            if (password.length < 4) {
+                document.getElementById('errpassword').innerHTML = "Enater 4 degit password";
                 return false;
             }
 
             if (conpassword == "") {
-                document.getElementById('errconpassword').innerHTML="Enater confirm password";
+                document.getElementById('errconpassword').innerHTML = "Enater confirm password";
                 return false;
             }
 
             if (password != conpassword) {
-                document.getElementById('errconpassword').innerHTML="Confirm password do not match";
+                document.getElementById('errconpassword').innerHTML = "Confirm password do not match";
                 return false;
             }
 
             if (date == "") {
-                document.getElementById('errdate').innerHTML="Enater date";
+                document.getElementById('errdate').innerHTML = "Enater date";
                 return false;
             }
 
+            // else if((date.getFullYear() - current.getFullYear()) < 18){
+            //     document.getElementById('errdate').innerHTML = "User under 18 years old";
+            //     return false;
+            // }
+
             if (number == "") {
-                document.getElementById('errnumber').innerHTML="Enater Mobile Number";
+                document.getElementById('errnumber').innerHTML = "Enater Mobile Number";
                 return false;
             }
 
             if (number.length != 11) {
-                document.getElementById('errnumber').innerHTML="Enater 11 digit";
+                document.getElementById('errnumber').innerHTML = "Enater 11 digit";
                 return false;
             }
 
-            if (category == "---") {
-                document.getElementById('errcategory').innerHTML="Select catagory";
+            if (category.value == "0") {
+                document.getElementById('errcategory').innerHTML = "Select catagory";
                 return false;
             }
-            
+
+            return( true );
+
         }
     </script>
 

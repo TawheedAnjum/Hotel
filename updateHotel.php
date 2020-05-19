@@ -7,15 +7,13 @@ if (isset($_GET['hedit'])) :
 
   <?php
   $id = $_GET['hedit'];
-  $sql = "SELECT * FROM hprofile WHERE id='$id'";
+  $sql = "SELECT * FROM hotel_profile WHERE id='$id'";
   $result = $conn->query($sql);
 
   $row = $result->fetch_assoc();
-  $id = $row['id'];
-  $vemail = $row['vemail'];
-  $hemail = $row['hemail'];
-  $hname = $row['hname'];
-  $hphone = $row['hphone'];
+  $hotel_email = $row['hotel_email'];
+  $name = $row['name'];
+  $phone = $row['phone'];
   $adress = $row['adress'];
   $area = $row['area'];
   $rmax = $row['rmax'];
@@ -24,21 +22,6 @@ if (isset($_GET['hedit'])) :
   $img1 = $row['img1'];
   $img2 = $row['img2'];
   $img3 = $row['img3'];
-
-  if (isset($_POST['update'])) {
-    $vemail = $_POST['vemail'];
-    $hemail = $_POST['hemail'];
-    $hname = $_POST['hname'];
-    $hphone = $_POST['hphone'];
-    $adress = $_POST['adress'];
-    $area = $_POST['area'];
-    $rmax = $_POST['rmax'];
-    $rmin = $_POST['rmin'];
-
-    $sql = "UPDATE hprofile SET vemail='$vemail', hemail='$hemail', hname='$hname', hphone='$hphone' , adress='$adress'. area='$area', rmax='$rmax', rmin='$rmin' WHERE id='$id'";
-    $result = $conn->query($sql);
-  }
-
 
   ?>
 
@@ -99,31 +82,26 @@ if (isset($_GET['hedit'])) :
     <!-- main -->
     <main class="container">
       <div class="form-body">
-        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" enctype="multipart/form-data">
+        <form action="updatehoteldb.php" method="post" enctype="multipart/form-data">
 
           <table class="tab1">
             <tr>
               <th>
-              <input type="hidden" id="" name="id" value="<?php echo $id ?>">
-                <label for="vemail">Viwer Email:</label><br>
-                <input type="email" id="vemail" name="vemail" value="<?php echo $vemail ?>" style="width: 250px; margin-right: 10px">
+                <input type="hidden"  name="id" value="<?php echo $id; ?>">
+                <label for="hotel_email">Hotel Email:</label><br>
+                <input type="email" id="hotel_email" name="hotel_email" value="<?php echo $hotel_email; ?>" style="width: 250px; margin-right:10px;">
               </th>
               <th>
-                <label for="hemail">Hotel Email:</label><br>
-                <input type="email" id="hemail" name="hemail" value="<?php echo $hemail; ?>" style="width: 250px;">
+                <label for="phone">Phone Number:</label><br>
+                <input type="number" id="phone" name="phone" value="<?php echo $phone; ?>" style="width: 250px;">
               </th>
-            </tr>
           </table>
 
           <table class="tab2">
             <tr>
               <th>
-                <label for="hname">Hotel Name:</label><br>
-                <input type="text" id="hname" name="hname" value="<?php echo $hname; ?>" style="width: 250px; margin-right: 10px">
-              </th>
-              <th>
-                <label for="hphone">Phone Number:</label><br>
-                <input type="number" id="hphone" name="hphone" value="<?php echo $hphone; ?>" style="width: 250px;">
+                <label for="name">Hotel Name:</label><br>
+                <input type="text" id="name" name="name" value="<?php echo $name; ?>" style="width: 510px">
               </th>
             </tr>
           </table>
@@ -153,6 +131,34 @@ if (isset($_GET['hedit'])) :
               </th>
             </tr>
           </table>
+
+          <table class="tab5">
+            <tr>
+              <th>
+                <label for="description">Hotel Description:</label><br>
+                <textarea name="description" type="text" rows="5" cols="50" style="width: 510px"> <?php echo $description; ?></textarea>
+              </th>
+            </tr>
+          </table>
+
+          <!-- <table class="tab6">
+            <tr>
+              <th>
+                <p style="background-color: #65C386; padding:5px; color:white; font-size:1rem; margin-top:10px;">Upload image</p>
+              </th>
+            </tr>
+            <tr>
+              <th>
+                <input type="file" id="img1" name="img1" style="width: 166.67px; margin-right:5px;">
+              </th>
+              <th>
+                <input type="file" id="img2" name="img2" style="width: 166.67px; margin-right:5px;">
+              </th>
+              <th>
+                <input type="file" id="img3" name="img3" style="width: 166.67px;">
+              </th>
+            </tr>
+          </table> -->
           <table class="tab5">
             <tr>
               <th>

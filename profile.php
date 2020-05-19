@@ -1,3 +1,6 @@
+<?php if (isset($_GET['error'])) {
+    echo "<script>alert('Room already register');;</script>";
+}  ?>
 <!doctype html>
 <html lang="en">
 
@@ -15,11 +18,6 @@
 
     <!-- font -->
     <link href="https://fonts.googleapis.com/css?family=Cookie|Montez|Norican|Roboto&display=swap" rel="stylesheet">
-    <!-- font-family: 'Roboto', sans-serif;
-    font-family: 'Cookie', cursive;
-    font-family: 'Norican', cursive;
-    font-family: 'Montez', cursive; -->
-</head>
 
 <body>
 
@@ -31,7 +29,7 @@
                 </div>
                 <div class="head2">
                     <!-- <div class="n-item"><a href="index.html">Home</a></div> -->
-                    <div class="n-item"><a href="login.php">Login/a></div>
+                    <div class="n-item"><a href="login.php">Login</a></div>
                     <!-- <div class="n-item"><a href="">Contact</a></div> -->
                     <div class="n-item button"><a href="index.php" class="btn1" style="color: white;">logout</a>
                     </div>
@@ -56,16 +54,15 @@
 
     session_start();
     if (isset($_SESSION["logemail"])) {
-        $vemail = $_SESSION["logemail"];
+        $viwer_email = $_SESSION["logemail"];
     }
 
-    $sql3 = "SELECT * FROM hprofile WHERE vemail='$vemail'";
+    $sql3 = "SELECT * FROM hotel_profile WHERE viwer_email='$viwer_email'";
     $result3 = mysqli_query($conn, $sql3);
     $row3 = mysqli_fetch_array($result3);
 
-        echo "
+    echo "
     <main class='container'>
-        <!-- hotel image -->
         <div class='img_body'>
             <div class='header_img'>                
                     <img src='db_image/" . $row3['img1'] . "' width='680' height='480'>
@@ -82,9 +79,9 @@
             <div class='body1'>
                 <div class='header'>
                     <div align='right'>
-                        <a href='editroom.php?redit=". $row3['id'] ."' style='background-color: rgb(230, 230, 230); color: black; margin-right: 5px;'>Edit Room</a>
-                        <a href='updateHotel.php?hedit=". $row3['id'] ."'>Edit</a></div>
-                    <h4>" . $row3['hname'] . "</h4>
+                        <a href='editroom.php?redit=" . $row3['id'] . "' style='background-color: rgb(230, 230, 230); color: black; margin-right: 5px;'>Edit Room</a>
+                        <a href='updateHotel.php?hedit=" . $row3['id'] . "'>Edit</a></div>
+                    <h4>" . $row3['name'] . "</h4>
                     <p>" . $row3['adress'] . "</p>
                 </div>
                 <div class='description'>
@@ -95,9 +92,9 @@
             <div class='body2'>
                 <b>Hotel Contact:</b>
                 <p style='margin-bottom: 1rem;'>
-                    Email: "  . $row3['hemail'] . " <br>
-                    Phone: " . $row3['hphone'] . "<br>
-                    Phone: " . $row3['area'] . "<br>
+                    Email: "  . $row3['hotel_email'] . " <br>
+                    Phone: " . $row3['phone'] . "<br>
+                    Area: " . $row3['area'] . "<br>
                     Adress:" . $row3['adress'] . "
                 </p>
                 <b>Room price</b>
@@ -123,21 +120,51 @@
             </div>
 
             <div class="room">
-                <form action="profiledb.php" method="post">
+                <form action="profiledb.php" onsubmit="return validation()" method="post">
                     <Table>
-                        <tr> <th><input type="hidden" name="hname" value="<?php echo $row3['hname']; ?>" > </th></tr>
+                        <tr>
+                            <th><input type="hidden" name="hotel_id" value="<?php echo $row3['id']; ?>"> </th>
+                        </tr>
                         <tr>
                             <th>
-                                <label for="room">Enter Room1 Name:</label> <br>
-                                <input type="text" name="room" style="width: 200px">
+                                <label for="room">Enter Room Name:</label> <br>
+                                <input type="text" id="room" name="room" style="width: 200px">
+
+                                <br><span id="errroom" style="color: red"></span>
                             </th>
                             <th>
                                 <label for="room" style="margin-left:5px; width: 80px;">Price:</label> <br>
-                                <input type="number" name="price" style="margin-left:5px; width: 80px;">
+                                <input type="number" name="price" id="price" style="margin-left:5px; width: 80px;">
+
+                                <br><span id="errprice" style="color: red"></span>
                             </th>
                         </tr>
-                        <tr> <th> <input type="submit" name="add" value="Add Room" class="publish"> </th></tr>
                     </Table>
+                    <table>
+                        <tr>
+                            <th>
+                                <label for="room" style="margin-top:1rem">Bed and person allow:</label> <br>
+                                <input type="text" name="bed" id="bed" style="width: 285px">
+
+                                <br><span id="errbed" style="color: red"></span>
+                            </th>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <th>
+                                <span style="margin-top:1rem;"> WIFI availability: </span>
+                                <input type="radio" id="Free" name="wifi" value="Free" style="margin-right: 5px; margin-left:10px; margin-top:1rem;" checked>Free
+                                <input type="radio" id="No" name="wifi" value="No" style="margin-right: 5px; margin-left:10px; margin-top:1rem;"> No
+                            </th>
+                        </tr>
+                    </table>
+                    <Table>
+                        <tr>
+                            <th> <input type="submit" name="add" value="Add Room" class="publish" style="margin-top: 1rem"> </th>
+                        </tr>
+                    </Table>
+                </form>
             </div>
         </div>
     </div>
@@ -174,6 +201,33 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-</body>
+
+    <!-- room valitation -->
+    <script>
+        function validation() {
+
+            var room = document.getElementById('room').value;
+            var price = document.getElementById('price').value;
+            var bed = document.getElementById('bed').value;
+            
+            if (room == "") {
+                document.getElementById('errroom').innerHTML = "Enater room name";
+                return false;
+            }
+
+            if (price == "") {
+                document.getElementById('errprice').innerHTML = "Enater price";
+                return false;
+            }
+
+            if (bed == "") {
+                document.getElementById('errbed').innerHTML = "Enater bed";
+                return false;
+            }
+
+            return (true);
+
+        }
+    </script>
 
 </html>

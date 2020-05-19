@@ -18,10 +18,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $email = $_POST['email'];
         $password = $_POST['password'];
         $conpassword = $_POST['conpassword'];
-        $date = $_POST['date'];
+        $dob = $_POST['date'];
         $number = $_POST['number'];
         $category = $_POST['category'];
 
+        $date = date('Y-m-d', strtotime($dob));
     }
 
     if ($password != $conpassword) {
@@ -29,16 +30,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit;
     }
 
-    $sql = "INSERT INTO user (email, password, date, number, category ) VALUES(?,?,?,?,?)";
-    $stmtinsert = $conn->prepare($sql);
-    $stmtinsert->bind_param("sssss", $email, $password, $date, $number, $category);
-    $result = $stmtinsert->execute();
-    if ($result) {
-        echo 'Successfully registered.';
-        header('Location: ' . 'login.php');
-    } else {
-        echo "There were erros while registering. Please <a href='register.php'>Retry</a>";
+    // cehck email
+    $sql1 = "SELECT * FROM user WHERE email='$email'";
+    $result1 = mysqli_query($conn, $sql1);
+    $count1 = mysqli_num_rows($result1);
+
+    if ($count1 > 0) {
+        
+        header('Location: ' . 'register.php?error');
+        
     }
+
+    // insert
+    else {
+
+        $sql = "INSERT INTO user (email, password, date, number, category ) VALUES(?,?,?,?,?)";
+        $stmtinsert = $conn->prepare($sql);
+        $stmtinsert->bind_param("sssss", $email, $password, $date, $number, $category);
+        $result = $stmtinsert->execute();
+        if ($result) {
+            echo 'Successfully registered.';
+            header('Location: ' . 'login.php');
+        } else {
+            echo "There were erros while registering. Please <a href='register.php'>Retry</a>";
+        }
+    }
+
 } else {
     echo 'Error';
 }

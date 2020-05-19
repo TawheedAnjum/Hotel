@@ -1,0 +1,71 @@
+.calender {
+    background-color: white;
+    height: 400px;
+    width: 600px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
+}
+
+.inner_cal {
+    background-color: rgb(84, 77, 206);
+    padding: 1rem 4rem;
+    line-height: .2rem;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+}
+
+.month p {
+    font-size: 1em;
+}
+
+.inner_cal i {
+    font-size: 1.2rem;
+    background-color: rgba(0, 0, 0, 0.068);
+    padding: 1.2rem 1.58rem;
+}
+
+.inner_cal i:hover {
+    background-color: rgba(0, 0, 0, 0.205);
+}
+
+.week {
+    display: flex;
+    background-color: rgb(75, 69, 182);
+    padding: .5rem 2rem;
+    align-items: center;
+    text-align: center;
+}
+
+.week div {
+    width: 14%;
+    font-size: 1.2rem;
+    color: white;
+}
+
+.day {
+    padding: 1rem 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    text-align: center;
+}
+
+.day div {
+    width: 14%;
+    font-size: 1.1rem;
+    line-height: 1.68rem;
+    padding: 5px 8px;
+}
+
+.past {
+    color: rgba(0, 0, 0, 0.39);
+}
+
+.day div:hover {
+    background-color: rgba(0, 0, 0, 0.233);
+    align-items: center;
+    transition: .5s;
+}

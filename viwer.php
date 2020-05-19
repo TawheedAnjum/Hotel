@@ -78,7 +78,7 @@
       $email= $_SESSION['logemail'];
     }
 
-    $sql = "SELECT * FROM hprofile";
+    $sql = "SELECT * FROM hotel_profile";
     $result = mysqli_query($conn, $sql);
     while ($row = mysqli_fetch_array($result)) {
 
@@ -89,7 +89,7 @@
         <div align='right' style='margin:.5rem'>
           <a href='viwer_hotel_profile.php?id=" . $row['id'] . "'>Booking</a>
         </div>
-        <h4>" . $row['hname'] . "</h4>
+        <h4>" . $row['name'] . "</h4>
         <p style='color:black'>" . $row['adress'] . "</p>
       </div>
     </div> ";

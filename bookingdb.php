@@ -2,39 +2,19 @@
 
 $conn = new mysqli('localhost', 'root', '', 'hotel') or die(mysqli_error($conn));
 
-if (isset($_POST['submit'])) {
-    $hname = $_POST['hname'];
-    $df = $_POST['start'];
-    $de = $_POST['end'];
-    $room = $_POST['room'];
-    $name = $_POST['name'];
+if(isset($_POST['date_update'])){
 
-    $start = date('Y-m-d', strtotime($df));
-    $end = date('Y-m-d', strtotime($de));
+    $room_id=$_POST['room_id'];
+    $hotel_id=$_POST['hotel_id'];
+    $user_name=$_POST['name'];
+    $start=$_POST['checkin'];
+    $end=$_POST['checkout'];
 
-    $sql2 = "SELECT * FROM hroom WHERE hname='$hname' AND room='$room'";
-    $result2 = $conn->query($sql2);
-    $count2 = mysqli_num_rows($result2);
+    $checkin = date('Y-m-d', strtotime($start));
+    $checkout = date('Y-m-d', strtotime($end));
 
-    $row = $result2->fetch_assoc();
-    $start1 = $row['start1'];
-    $end1 = $row['end1'];
-
-    if ($start1 == NULL) {
-        $sql = "UPDATE hroom SET  start1='$start', end1='$end', name1='$name' WHERE hname='$hname' AND room='$room' ";
-        $result = $conn->query($sql);
-        header('Location: ' . 'booking.php');
-    } else {
-        if (($start1 <= $start) && ($end1 >= $start)) {
-            echo "Sorry check in date is booked";
-        } else {
-            if (($start1 <= $end) && ($end1 >= $end)) {
-                echo "date in";
-            } else {
-                $sql = "UPDATE hroom SET  start2='$start', end2='$end', name2='$name' WHERE hname='$hname' AND room='$room' ";
-                $result = $conn->query($sql);
-                header('Location: ' . 'booking.php');
-            }
-        }
-    }
+    $sql = "INSERT INTO date (hotel_id, room_id, user_name, checkin, checkout ) VALUES('$hotel_id', '$room_id', '$user_name', '$checkin', '$checkout')";
+    $result = $conn->query($sql);
+    
+    header('Location: ' . 'viwer_hotel_profile.php?id='.$hotel_id);
 }
